@@ -16,7 +16,7 @@ public class FollowTrajectory extends RamseteCommand {
   public FollowTrajectory(Trajectory trajectory) {
     super(trajectory, () -> Robot.drivetrain.getPose(), Robot.drivetrain.advanced.ramseteController,
     Robot.drivetrain.advanced.feedforward, Robot.drivetrain.advanced.kinematics, () -> Robot.drivetrain.getWheelSpeeds(),
-    Robot.drivetrain.advanced.leftPid, Robot.drivetrain.advanced.rightPid, Robot.drivetrain.advanced::drive);
+    Robot.drivetrain.advanced.leftPid, Robot.drivetrain.advanced.rightPid, Robot.drivetrain.advanced::tankDriveVolts);
     traj = trajectory;
     this.addRequirements(Robot.drivetrain);
   }

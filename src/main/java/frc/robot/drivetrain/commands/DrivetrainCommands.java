@@ -4,6 +4,7 @@
 
 package frc.robot.drivetrain.commands;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
 
@@ -15,5 +16,9 @@ public class DrivetrainCommands {
             new RunCommand(() -> Robot.drivetrain.arcadeDrive(Robot.driverGamepad.getDriveThrottle(), 
                                 Robot.driverGamepad.getDriveSteering()), 
                                 Robot.drivetrain));
+    }
+
+    public static Command stop(){
+        return new RunCommand(() -> Robot.drivetrain.stop(), Robot.drivetrain);
     }
 }

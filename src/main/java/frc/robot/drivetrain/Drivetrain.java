@@ -71,6 +71,10 @@ public class Drivetrain extends SubsystemBase {
     diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
+  public void stop(){
+    diffDrive.stopMotor();
+  }
+
   /** Resets robot odometry. */
   public void resetOdometry() {
     leftEncoder.reset();

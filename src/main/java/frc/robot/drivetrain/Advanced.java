@@ -15,13 +15,14 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Robot;
 
 /** Add your docs here. */
 public class Advanced {
-    
+
     private Spark leftMotor;
     private Spark rightMotor;
     private final Encoder leftEncoder;
@@ -36,7 +37,8 @@ public class Advanced {
 
     public final PIDController leftPid = new PIDController(DrivetrainConstants.kPLeft, 0, 0);
     public final PIDController rightPid = new PIDController(DrivetrainConstants.kPRight, 0, 0);
-    public  RamseteController ramseteController = new RamseteController();
+    public RamseteController ramseteController = new RamseteController(DrivetrainConstants.ramseteB,
+            DrivetrainConstants.ramseteZeta);
 
     public Advanced(Spark leftM, Spark rightM, Encoder lEncoder, Encoder rEncoder, DifferentialDrive diff) {
         leftMotor = leftM;
@@ -64,13 +66,30 @@ public class Advanced {
     public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
         var leftFeedforward = feedforward.calculate(speeds.leftMetersPerSecond);
         var rightFeedforward = feedforward.calculate(speeds.rightMetersPerSecond);
-    
+
         var leftOutput = leftPid.calculate(leftEncoder.getRate(), speeds.leftMetersPerSecond);
         var rightOutput = rightPid.calculate(rightEncoder.getRate(), speeds.rightMetersPerSecond);
-    
+
         leftMotor.setVoltage((leftOutput + leftFeedforward));
-        rightMotor.setVoltage((rightOutput + rightFeedforward)); //negate right side
-    
+        rightMotor.setVoltage((rightOutput + rightFeedforward)); // negate right side
+
         diffDrive.feed();
-      }
+    }
+
+    /**
+     * Controls the left and right sides of the drive directly with voltages.
+     *
+     * @param leftVolts  the commanded left output
+     * @param rightVolts the commanded right output
+     */
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        var batteryVoltage = RobotController.getBatteryVoltage();
+        if (Math.max(Math.abs(leftVolts), Math.abs(rightVolts)) > batteryVoltage) {
+            leftVolts *= batteryVoltage / 12.0;
+            rightVolts *= batteryVoltage / 12.0;
+        }
+        leftMotor.setVoltage(leftVolts);
+        rightMotor.setVoltage(rightVolts);
+        diffDrive.feed();
+    }
 }
