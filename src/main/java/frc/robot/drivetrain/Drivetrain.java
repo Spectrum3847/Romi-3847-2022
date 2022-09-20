@@ -9,14 +9,14 @@ public class Drivetrain extends SubsystemBase {
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
-  private final Spark leftMotor = new Spark(RobotConstants.MotorIDs.driveMotorLeft);
-  private final Spark rightMotor = new Spark(RobotConstants.MotorIDs.driveMotorRight);
+  public final Spark leftMotor = new Spark(RobotConstants.MotorIDs.driveMotorLeft);
+  public final Spark rightMotor = new Spark(RobotConstants.MotorIDs.driveMotorRight);
 
   // Set up the differential drive controller
-  private final DifferentialDrive diffDrive = new DifferentialDrive(leftMotor, rightMotor);
+  public final DifferentialDrive diffDrive = new DifferentialDrive(leftMotor, rightMotor);
 
   public final Odometry odometry;
-  private final DrivetrainSim driveSim;
+  public final DrivetrainSim driveSim;
   public final Advanced advanced;
 
   /** Creates a new Drivetrain. */
@@ -28,9 +28,9 @@ public class Drivetrain extends SubsystemBase {
 
     odometry = new Odometry();
     // SIMULATION ONLY THINGS
-    driveSim = new DrivetrainSim(leftMotor, rightMotor, odometry.leftEncoder, odometry.rightEncoder, odometry.m_gyro);
+    driveSim = new DrivetrainSim(this);
     // ADAVANCED Drive things
-    advanced = new Advanced(leftMotor, rightMotor, odometry.leftEncoder, odometry.rightEncoder, diffDrive);
+    advanced = new Advanced(this);
   }
 
   // Arcade Drive = Throttle on one axis and steering on another axis
@@ -38,20 +38,10 @@ public class Drivetrain extends SubsystemBase {
     diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
-<<<<<<< Updated upstream
   public void stop(){
     diffDrive.stopMotor();
   }
 
-  /** Resets robot odometry. */
-  public void resetOdometry() {
-    leftEncoder.reset();
-    rightEncoder.reset();
-    resetGyro();
-  }
-
-=======
->>>>>>> Stashed changes
   /** Update odometry - this should be run every robot loop. */
   public void periodic() {
     odometry.updateOdometry();

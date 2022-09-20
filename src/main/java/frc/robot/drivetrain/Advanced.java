@@ -1,7 +1,5 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
+//Adavnced Controls
+//PID, Kinematics, Velocity controlers, etc
 package frc.robot.drivetrain;
 
 import java.util.ArrayList;
@@ -14,24 +12,12 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /** Add your docs here. */
 public class Advanced {
-<<<<<<< Updated upstream
 
-    private Spark leftMotor;
-    private Spark rightMotor;
-    private final Encoder leftEncoder;
-    private final Encoder rightEncoder;
-    private final DifferentialDrive diffDrive;
-=======
-    
     private Drivetrain dt;
->>>>>>> Stashed changes
 
     public final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DrivetrainConstants.kS,
             DrivetrainConstants.kVLinear);
@@ -66,15 +52,14 @@ public class Advanced {
     public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
         var leftFeedforward = feedforward.calculate(speeds.leftMetersPerSecond);
         var rightFeedforward = feedforward.calculate(speeds.rightMetersPerSecond);
-<<<<<<< Updated upstream
 
-        var leftOutput = leftPid.calculate(leftEncoder.getRate(), speeds.leftMetersPerSecond);
-        var rightOutput = rightPid.calculate(rightEncoder.getRate(), speeds.rightMetersPerSecond);
+        var leftOutput = leftPid.calculate(dt.odometry.leftEncoder.getRate(), speeds.leftMetersPerSecond);
+        var rightOutput = rightPid.calculate(dt.odometry.rightEncoder.getRate(), speeds.rightMetersPerSecond);
 
-        leftMotor.setVoltage((leftOutput + leftFeedforward));
-        rightMotor.setVoltage((rightOutput + rightFeedforward)); // negate right side
+        dt.leftMotor.setVoltage((leftOutput + leftFeedforward));
+        dt.rightMotor.setVoltage((rightOutput + rightFeedforward)); // negate right side
 
-        diffDrive.feed();
+        dt.diffDrive.feed();
     }
 
     /**
@@ -89,19 +74,9 @@ public class Advanced {
             leftVolts *= batteryVoltage / 12.0;
             rightVolts *= batteryVoltage / 12.0;
         }
-        leftMotor.setVoltage(leftVolts);
-        rightMotor.setVoltage(rightVolts);
-        diffDrive.feed();
-    }
-=======
-    
-        var leftOutput = leftPid.calculate(dt.odometry.leftEncoder.getRate(), speeds.leftMetersPerSecond);
-        var rightOutput = rightPid.calculate(dt.odometry.rightEncoder.getRate(), speeds.rightMetersPerSecond);
-    
-        dt.leftMotor.setVoltage((leftOutput + leftFeedforward));
-        dt.rightMotor.setVoltage((rightOutput + rightFeedforward)); //negate right side
-    
+        dt.leftMotor.setVoltage(leftVolts);
+        dt.rightMotor.setVoltage(rightVolts);
         dt.diffDrive.feed();
-      }
->>>>>>> Stashed changes
+    }
+    
 }
