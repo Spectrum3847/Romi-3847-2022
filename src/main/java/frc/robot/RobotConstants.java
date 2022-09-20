@@ -14,4 +14,9 @@ package frc.robot;
  */
 public final class RobotConstants {
 
+    public static final class MotorIDs{
+        public static final int driveMotorLeft = 0;
+        public static final int driveMotorRight = 1;
+    }
+
 }

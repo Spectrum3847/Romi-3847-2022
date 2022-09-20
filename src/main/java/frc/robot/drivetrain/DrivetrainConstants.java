@@ -25,6 +25,4 @@ public class DrivetrainConstants {
   public static final double kALinear = 0.60273;
   public static final double kVAngular = 20;
   public static final double kAAngular = 1;
-
-
 }

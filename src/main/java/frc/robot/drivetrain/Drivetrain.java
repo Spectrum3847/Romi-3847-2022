@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.Conversions;
 import frc.robot.Robot;
+import frc.robot.RobotConstants;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -19,8 +20,8 @@ public class Drivetrain extends SubsystemBase {
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
-  private final Spark leftMotor = new Spark(0);
-  private final Spark rightMotor = new Spark(1);
+  private final Spark leftMotor = new Spark(RobotConstants.MotorIDs.driveMotorLeft);
+  private final Spark rightMotor = new Spark(RobotConstants.MotorIDs.driveMotorRight);
 
   // The Romi has onboard encoders that are hardcoded
   // to use DIO pins 4/5 and 6/7 for the left and right
