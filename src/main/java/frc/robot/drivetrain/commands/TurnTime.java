@@ -2,7 +2,6 @@ package frc.robot.drivetrain.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.drivetrain.Drivetrain;
 
 /*
  * Creates a new TurnTime command. This command will turn your robot for a
