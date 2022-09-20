@@ -26,7 +26,7 @@ public class TurnDegrees extends CommandBase {
   public void initialize() {
     // Set motors to stop, read encoder values for starting point
     Robot.drivetrain.arcadeDrive(0, 0);
-    Robot.drivetrain.resetOdometry();
+    Robot.drivetrain.odometry.resetOdometry();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,8 +55,8 @@ public class TurnDegrees extends CommandBase {
   }
 
   private double getAverageTurningDistance() {
-    double leftDistance = Math.abs(Robot.drivetrain.getLeftDistanceInch());
-    double rightDistance = Math.abs(Robot.drivetrain.getRightDistanceInch());
+    double leftDistance = Math.abs(Robot.drivetrain.odometry.getLeftDistanceInch());
+    double rightDistance = Math.abs(Robot.drivetrain.odometry.getRightDistanceInch());
     return (leftDistance + rightDistance) / 2.0;
   }
 }

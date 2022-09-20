@@ -18,16 +18,20 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import frc.robot.Robot;
 
 /** Add your docs here. */
 public class Advanced {
+<<<<<<< Updated upstream
 
     private Spark leftMotor;
     private Spark rightMotor;
     private final Encoder leftEncoder;
     private final Encoder rightEncoder;
     private final DifferentialDrive diffDrive;
+=======
+    
+    private Drivetrain dt;
+>>>>>>> Stashed changes
 
     public final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DrivetrainConstants.kS,
             DrivetrainConstants.kVLinear);
@@ -40,12 +44,8 @@ public class Advanced {
     public RamseteController ramseteController = new RamseteController(DrivetrainConstants.ramseteB,
             DrivetrainConstants.ramseteZeta);
 
-    public Advanced(Spark leftM, Spark rightM, Encoder lEncoder, Encoder rEncoder, DifferentialDrive diff) {
-        leftMotor = leftM;
-        rightMotor = rightM;
-        leftEncoder = lEncoder;
-        rightEncoder = rEncoder;
-        diffDrive = diff;
+    public Advanced(Drivetrain dt) {
+        this.dt = dt;
     }
 
     public void plotTrajectory(Trajectory trajectory) {
@@ -55,7 +55,7 @@ public class Advanced {
             poses.add(pose.poseMeters);
         }
 
-        Robot.drivetrain.fieldSim.getObject("foo").setPoses(poses);
+        dt.odometry.fieldSim.getObject("foo").setPoses(poses);
     }
 
     public void drive(double xSpeed, double rot) {
@@ -66,6 +66,7 @@ public class Advanced {
     public void setSpeeds(DifferentialDriveWheelSpeeds speeds) {
         var leftFeedforward = feedforward.calculate(speeds.leftMetersPerSecond);
         var rightFeedforward = feedforward.calculate(speeds.rightMetersPerSecond);
+<<<<<<< Updated upstream
 
         var leftOutput = leftPid.calculate(leftEncoder.getRate(), speeds.leftMetersPerSecond);
         var rightOutput = rightPid.calculate(rightEncoder.getRate(), speeds.rightMetersPerSecond);
@@ -92,4 +93,15 @@ public class Advanced {
         rightMotor.setVoltage(rightVolts);
         diffDrive.feed();
     }
+=======
+    
+        var leftOutput = leftPid.calculate(dt.odometry.leftEncoder.getRate(), speeds.leftMetersPerSecond);
+        var rightOutput = rightPid.calculate(dt.odometry.rightEncoder.getRate(), speeds.rightMetersPerSecond);
+    
+        dt.leftMotor.setVoltage((leftOutput + leftFeedforward));
+        dt.rightMotor.setVoltage((rightOutput + rightFeedforward)); //negate right side
+    
+        dt.diffDrive.feed();
+      }
+>>>>>>> Stashed changes
 }

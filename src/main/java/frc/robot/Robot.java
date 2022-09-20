@@ -144,7 +144,7 @@ public class Robot extends TimedRobot {
   private static int counter = 11;
   public static boolean isRomiConnected(){
     if (counter > 20){
-      double currentAccel = drivetrain.getAccelZ();
+      double currentAccel = drivetrain.odometry.getAccelZ();
       romiConnected = currentAccel != lastAccelValue;
       lastAccelValue = currentAccel;
       counter = 0;
