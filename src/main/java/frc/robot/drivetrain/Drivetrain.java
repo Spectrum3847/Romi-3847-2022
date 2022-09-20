@@ -61,8 +61,8 @@ public class Drivetrain extends SubsystemBase {
 
     // SIMULATION ONLY THINGS
     driveSim = new DrivetrainSim(leftMotor, rightMotor, leftEncoder, rightEncoder, m_gyro);
-    //ADAVANCED Drive things
-    advanced = new Advanced(leftMotor, rightMotor, leftEncoder, rightEncoder,diffDrive);
+    // ADAVANCED Drive things
+    advanced = new Advanced(leftMotor, rightMotor, leftEncoder, rightEncoder, diffDrive);
   }
 
   // Arcade Drive = Throttle on one axis and steering on another axis
@@ -70,10 +70,16 @@ public class Drivetrain extends SubsystemBase {
     diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
+  /** Resets robot odometry. */
+  public void resetOdometry() {
+    leftEncoder.reset();
+    rightEncoder.reset();
+    resetGyro();
+  }
+
   /** Update odometry - this should be run every robot loop. */
   public void periodic() {
     updateOdometry();
-    fieldSim.setRobotPose(m_odometry.getPoseMeters());
   }
 
   /** Update our simulation. This should be run every robot loop in simulation. */
@@ -94,14 +100,9 @@ public class Drivetrain extends SubsystemBase {
     }
     m_odometry.update(
         angle, leftEncoder.getDistance(), rightEncoder.getDistance());
+    fieldSim.setRobotPose(m_odometry.getPoseMeters());
   }
 
-  /** Resets robot odometry. */
-  public void resetOdometry() {
-    leftEncoder.reset();
-    rightEncoder.reset();
-    resetGyro();
-  }
   public void resetOdometry(Pose2d pose) {
     leftEncoder.reset();
     rightEncoder.reset();
@@ -134,12 +135,12 @@ public class Drivetrain extends SubsystemBase {
     return Conversions.metersToInches((getLeftDistanceInch() + getRightDistanceInch()) / 2.0);
   }
 
-  /** The acceleration in the Z-axis in Gs.*/
+  /** The acceleration in the Z-axis in Gs. */
   public double getAccelZ() {
     return accelerometer.getZ();
   }
 
-  /**Current angle of the Romi around the Z-axis in degrees.*/
+  /** Current angle of the Romi around the Z-axis in degrees. */
   public double getGyroAngleZ() {
     return romiGyro.getAngleZ();
   }
