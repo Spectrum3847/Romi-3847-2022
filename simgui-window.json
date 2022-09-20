@@ -13,13 +13,13 @@
   "Window": {
     "###/SmartDashboard/Field": {
       "Collapsed": "0",
-      "Pos": "399,157",
+      "Pos": "382,230",
       "Size": "545,361"
     },
     "###Addressable LEDs": {
       "Collapsed": "0",
       "Pos": "263,3",
-      "Size": "170,674"
+      "Size": "142,563"
     },
     "###Analog Inputs": {
       "Collapsed": "0",
@@ -29,22 +29,22 @@
     "###DIO": {
       "Collapsed": "0",
       "Pos": "470,20",
-      "Size": "195,242"
+      "Size": "162,215"
     },
     "###Encoders": {
       "Collapsed": "0",
       "Pos": "991,23",
-      "Size": "280,502"
+      "Size": "231,445"
     },
     "###FMS": {
       "Collapsed": "0",
       "Pos": "6,675",
-      "Size": "336,164"
+      "Size": "283,146"
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "367,725",
-      "Size": "976,219"
+      "Pos": "352,613",
+      "Size": "796,189"
     },
     "###Keyboard 0 Settings": {
       "Collapsed": "0",
@@ -53,8 +53,8 @@
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "557,252",
-      "Size": "937,532"
+      "Pos": "831,341",
+      "Size": "937,470"
     },
     "###Other Devices": {
       "Collapsed": "0",
@@ -64,17 +64,17 @@
     "###PWM Outputs": {
       "Collapsed": "0",
       "Pos": "836,32",
-      "Size": "131,120"
+      "Size": "110,108"
     },
     "###System Joysticks": {
       "Collapsed": "0",
       "Pos": "6,437",
-      "Size": "232,254"
+      "Size": "192,218"
     },
     "###Timing": {
       "Collapsed": "0",
       "Pos": "6,187",
-      "Size": "162,168"
+      "Size": "135,150"
     },
     "Debug##Default": {
       "Collapsed": "0",
@@ -84,7 +84,7 @@
     "Robot State": {
       "Collapsed": "0",
       "Pos": "5,20",
-      "Size": "109,114"
+      "Size": "92,99"
     }
   }
 }

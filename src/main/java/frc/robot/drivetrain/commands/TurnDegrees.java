@@ -28,7 +28,7 @@ public class TurnDegrees extends CommandBase {
   public void initialize() {
     // Set motors to stop, read encoder values for starting point
     m_drive.arcadeDrive(0, 0);
-    m_drive.resetEncoders();
+    m_drive.resetOdometry();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
