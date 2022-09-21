@@ -25,7 +25,7 @@ public class FollowTrajectory extends RamseteCommand {
   @Override
   public void initialize() {
     super.initialize();
-    Robot.drivetrain.advanced.plotter.plotTrajectoryEnd(trajectory);
+    Robot.drivetrain.odometry.plotTrajectory(trajectory);
   }
 
 

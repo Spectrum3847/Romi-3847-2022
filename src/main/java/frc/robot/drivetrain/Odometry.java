@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
@@ -46,10 +47,13 @@ public class Odometry {
                 / DrivetrainConstants.kCountsPerRevolution);
 
         SmartDashboard.putData("Field", fieldSim); // This is how we can see the robot position on the field
-
+        fieldSim.getObject("trajectory").setPose(new Pose2d()); //Set the intial pose for the trajectory, lets you edit settings
     }
 
 
+    public void plotTrajectory(Trajectory trajectory){
+        fieldSim.getObject("trajectory").setTrajectory(trajectory);
+    }
     /**
      * Update robot odometry. Odometry is the estimate of robot postion from
      * encoders and gyro

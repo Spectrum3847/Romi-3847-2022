@@ -13,8 +13,6 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import frc.lib.auton.TrajectoryPlotter;
 
 /** Add your docs here. */
 public class Advanced {
@@ -32,11 +30,9 @@ public class Advanced {
     public final RamseteController ramseteController = new RamseteController(DrivetrainConstants.ramseteB,
             DrivetrainConstants.ramseteZeta);
 
-    public final TrajectoryPlotter plotter;
 
     public Advanced(Drivetrain dt) {
         this.dt = dt;
-        plotter = new TrajectoryPlotter(dt.odometry.fieldSim);
     }
 
     //DriveSpeeds takes xSpeed in meters per sec, and rot in radians per sec
