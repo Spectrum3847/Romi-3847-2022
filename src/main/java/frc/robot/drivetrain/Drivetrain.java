@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotConstants;
+import frc.robot.drivetrain.commands.DrivetrainCommands;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -26,7 +27,7 @@ public class Drivetrain extends SubsystemBase {
     // gearbox is constructed, you might have to invert the left side instead.
     rightMotor.setInverted(true);
 
-    odometry = new Odometry();
+    odometry = new Odometry(this);
     // SIMULATION ONLY THINGS
     driveSim = new DrivetrainSim(this);
     // ADAVANCED Drive things

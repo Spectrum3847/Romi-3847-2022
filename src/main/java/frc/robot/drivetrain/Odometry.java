@@ -19,6 +19,7 @@ import frc.robot.Robot;
 /** Add your docs here. */
 public class Odometry {
 
+    private final Drivetrain drivetrain;
     // The Romi has onboard encoders that are hardcoded
     // to use DIO pins 4/5 and 6/7 for the left and right
     public final Encoder leftEncoder = new Encoder(4, 5);
@@ -36,24 +37,18 @@ public class Odometry {
     // Field Odometry and Simulation things
     public final DifferentialDriveOdometry diffOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
 
-    public Odometry() {
+    public Odometry(Drivetrain dt) {
+        drivetrain = dt;
         // Use meters as unit for encoder distances
         leftEncoder.setDistancePerPulse((2 * Math.PI * DrivetrainConstants.kWheelRadius)
                 / DrivetrainConstants.kCountsPerRevolution);
         rightEncoder.setDistancePerPulse((2 * Math.PI * DrivetrainConstants.kWheelRadius)
                 / DrivetrainConstants.kCountsPerRevolution);
-        resetOdometry();
 
         SmartDashboard.putData("Field", fieldSim); // This is how we can see the robot position on the field
 
     }
 
-    /** Resets robot odometry. */
-    public void resetOdometry() {
-        leftEncoder.reset();
-        rightEncoder.reset();
-        resetGyro();
-    }
 
     /**
      * Update robot odometry. Odometry is the estimate of robot postion from
@@ -71,10 +66,18 @@ public class Odometry {
         fieldSim.setRobotPose(diffOdometry.getPoseMeters());
     }
 
+    /** Resets robot odometry to a pose*/
     public void resetOdometry(Pose2d pose) {
         leftEncoder.reset();
         rightEncoder.reset();
-        diffOdometry.resetPosition(pose, Rotation2d.fromDegrees(romiGyro.getAngleZ()));
+        resetGyro();
+        drivetrain.driveSim.resetSimOdometry();
+        diffOdometry.resetPosition(pose, Rotation2d.fromDegrees(0));
+    }
+
+    /** Resets robot odometry. */
+    public void resetOdometry() {
+        resetOdometry(new Pose2d());
     }
 
     /** Check the current robot pose. */

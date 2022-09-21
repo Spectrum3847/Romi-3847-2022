@@ -14,7 +14,10 @@ import frc.robot.auton.AutonSetup;
 import frc.robot.driverGamepad.DriverGamepad;
 import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrain.commands.DrivetrainCommands;
+import frc.robot.elevatorSim.Elevator;
+import frc.robot.elevatorSim.ElevatorCommands;
 import frc.robot.leds.LEDs;
+import frc.robot.leds.commands.LEDCommands;
 import frc.robot.onBoardIO.OnBoardIO;
 import frc.robot.onBoardIO.OnBoardIO.ChannelMode;
 
@@ -30,10 +33,12 @@ public class Robot extends TimedRobot {
   public static OnBoardIO onboardIO;
   public static LEDs leds;
   public static DriverGamepad driverGamepad;
+  public static Elevator elevator;
 
   //Intialize subsystems and run their setupDefaultCommand methods here
   private void intializeSubsystems() {
     drivetrain = new Drivetrain();
+    elevator = new Elevator();
     leds = new LEDs();
     onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
     driverGamepad = new DriverGamepad();
@@ -41,6 +46,8 @@ public class Robot extends TimedRobot {
 
     //Set Default Commands
     DrivetrainCommands.setupDefaultCommand();
+    ElevatorCommands.setupDefaultCommand();
+    LEDCommands.setupDefaultCommand();
   }
 
   public static String MAC = "";

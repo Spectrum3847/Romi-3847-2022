@@ -8,11 +8,6 @@
         "visible": true
       }
     },
-    "DIO": {
-      "window": {
-        "visible": true
-      }
-    },
     "Encoders": {
       "0": {
         "header": {
@@ -80,10 +75,16 @@
       "/Shuffleboard/Main/Auton": "String Chooser",
       "/Shuffleboard/Main/Auton Selection": "String Chooser",
       "/Shuffleboard/Main/SendableChooser[0]": "String Chooser",
+      "/SmartDashboard/Elevator Sim": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/SendableChooser[0]": "String Chooser"
     },
     "windows": {
+      "/SmartDashboard/Elevator Sim": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Field": {
         "Robot": {
           "style": "Box/Image"
@@ -116,5 +117,8 @@
     "SmartDashboard": {
       "open": true
     }
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

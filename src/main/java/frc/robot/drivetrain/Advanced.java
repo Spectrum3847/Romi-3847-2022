@@ -13,6 +13,8 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import frc.lib.auton.TrajectoryPlotter;
 
 /** Add your docs here. */
 public class Advanced {
@@ -27,24 +29,18 @@ public class Advanced {
 
     public final PIDController leftPid = new PIDController(DrivetrainConstants.kPLeft, 0, 0);
     public final PIDController rightPid = new PIDController(DrivetrainConstants.kPRight, 0, 0);
-    public RamseteController ramseteController = new RamseteController(DrivetrainConstants.ramseteB,
+    public final RamseteController ramseteController = new RamseteController(DrivetrainConstants.ramseteB,
             DrivetrainConstants.ramseteZeta);
+
+    public final TrajectoryPlotter plotter;
 
     public Advanced(Drivetrain dt) {
         this.dt = dt;
+        plotter = new TrajectoryPlotter(dt.odometry.fieldSim);
     }
 
-    public void plotTrajectory(Trajectory trajectory) {
-        ArrayList<Pose2d> poses = new ArrayList<>();
-
-        for (Trajectory.State pose : trajectory.getStates()) {
-            poses.add(pose.poseMeters);
-        }
-
-        dt.odometry.fieldSim.getObject("foo").setPoses(poses);
-    }
-
-    public void drive(double xSpeed, double rot) {
+    //DriveSpeeds takes xSpeed in meters per sec, and rot in radians per sec
+    public void driveSpeeds(double xSpeed, double rot) {
         var wheelSpeeds = kinematics.toWheelSpeeds(new ChassisSpeeds(xSpeed, 0.0, rot));
         setSpeeds(wheelSpeeds);
     }

@@ -4,10 +4,12 @@
 
 package frc.robot.drivetrain;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.AnalogGyroSim;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
@@ -40,13 +42,18 @@ public class DrivetrainSim {
     m_rightEncoderSim = new EncoderSim(dt.odometry.rightEncoder);
   }
 
+  /** Reset all sim devices to 0 */
+  public void resetSimOdometry(){
+    m_drivetrainSimulator.setPose(new Pose2d());
+  }
+
   /** Update our simulation. This should be run every robot loop in simulation. */
   public void simulationPeriodic() {
     // To update our simulation, we set motor voltage inputs, update the
     // simulation, and write the simulated positions and velocities to our
     // simulated encoder and gyro. We negate the right side so that positive
     // voltages make the right side move forward.
-    if (!Robot.romiConnected) { // Only update these if romi isn't connected
+    if (!Robot.romiConnected && !DriverStation.isDisabled()) { // Only update these if romi isn't connected
       m_drivetrainSimulator.setInputs(
           dt.leftMotor.get() * RobotController.getInputVoltage(),
           dt.rightMotor.get() * RobotController.getInputVoltage());
@@ -57,6 +64,8 @@ public class DrivetrainSim {
       m_rightEncoderSim.setDistance(m_drivetrainSimulator.getRightPositionMeters());
       m_rightEncoderSim.setRate(m_drivetrainSimulator.getRightVelocityMetersPerSecond());
       m_gyroSim.setAngle(-m_drivetrainSimulator.getHeading().getDegrees());
+
+
     }
   }
 }

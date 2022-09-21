@@ -16,7 +16,7 @@ public class TurnTime extends CommandBase {
    * Creates a new TurnTime.
    *
    * @param speed The speed which the robot will turn. Negative is in reverse.
-   * @param time How much time to turn in seconds
+   * @param time  How much time to turn in seconds
    * @param drive The drive subsystem on which this command will run
    */
   public TurnTime(double speed, double time) {
