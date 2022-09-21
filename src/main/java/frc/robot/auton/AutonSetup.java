@@ -6,8 +6,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Robot;
+import frc.robot.auton.commands.AutonCommands;
 import frc.robot.auton.commands.AutonDistance;
 import frc.robot.auton.commands.AutonTime;
 import frc.robot.auton.commands.FollowTrajectory;
@@ -17,13 +17,14 @@ import frc.robot.drivetrain.commands.DrivetrainCommands;
 public class AutonSetup {
     public static final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
-    //AutoRoutines
+    // AutoRoutines
     private static final Command autonTime = new AutonTime();
     private static final Command autonDistance = new AutonDistance();
     private static final Trajectory examplePath = PathPlanner.loadPath("3mFWD", DrivetrainConstants.kMaxSpeed,
-    DrivetrainConstants.kMaxAccel);
-    private static final Command oneMeter = new FollowTrajectory(examplePath).andThen(DrivetrainCommands.stop());
-    
+            DrivetrainConstants.kMaxAccel);
+    private static final Command oneMeter = AutonCommands.intializePathFollowing(examplePath)
+            .andThen(new FollowTrajectory(examplePath).andThen(DrivetrainCommands.stop()));
+
     // A chooser for autonomous commands
     public static void setupSelectors() {
         autonChooser.setDefaultOption("AutonTime", autonTime);
@@ -31,7 +32,6 @@ public class AutonSetup {
         autonChooser.addOption("Nothing", new PrintCommand("DO NOTHING AUTON RUNNING"));
         autonChooser.addOption("oneMeter", oneMeter);
     }
-
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.

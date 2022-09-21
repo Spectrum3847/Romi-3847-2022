@@ -10,14 +10,14 @@ import frc.robot.Robot;
 
 public class FollowTrajectory extends RamseteCommand {
 
-  Trajectory traj;
+  Trajectory trajectory;
 
   /** Creates a new FollowPPTrajectory. */
   public FollowTrajectory(Trajectory trajectory) {
-    super(trajectory, () -> Robot.drivetrain.getPose(), Robot.drivetrain.advanced.ramseteController,
-    Robot.drivetrain.advanced.feedforward, Robot.drivetrain.advanced.kinematics, () -> Robot.drivetrain.getWheelSpeeds(),
+    super(trajectory, () -> Robot.drivetrain.odometry.getPose(), Robot.drivetrain.advanced.ramseteController,
+    Robot.drivetrain.advanced.feedforward, Robot.drivetrain.advanced.kinematics, () -> Robot.drivetrain.odometry.getWheelSpeeds(),
     Robot.drivetrain.advanced.leftPid, Robot.drivetrain.advanced.rightPid, Robot.drivetrain.advanced::tankDriveVolts);
-    traj = trajectory;
+    this.trajectory = trajectory;
     this.addRequirements(Robot.drivetrain);
   }
 
@@ -25,7 +25,7 @@ public class FollowTrajectory extends RamseteCommand {
   @Override
   public void initialize() {
     super.initialize();
-    //Robot.drivetrain.advanced.plotTrajectory(traj);
+    Robot.drivetrain.odometry.plotTrajectory(trajectory);
   }
 
 

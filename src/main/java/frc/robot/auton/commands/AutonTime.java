@@ -5,7 +5,6 @@
 package frc.robot.auton.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
 import frc.robot.drivetrain.commands.DriveTime;
 import frc.robot.drivetrain.commands.TurnTime;
 

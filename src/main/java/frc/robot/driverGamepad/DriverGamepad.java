@@ -6,6 +6,7 @@ package frc.robot.driverGamepad;
 
 import frc.lib.gamepads.Gamepad;
 import frc.lib.gamepads.mapping.ExpCurve;
+import frc.robot.elevatorSim.ElevatorCommands;
 
 /** Add your docs here. */
 public class DriverGamepad extends Gamepad{
@@ -21,7 +22,7 @@ public class DriverGamepad extends Gamepad{
     }
 
     public void setupTeleopButtons(){
-
+        gamepad.aButton.whileHeld(ElevatorCommands.goToHeight(30));
     }
   
     public void setupDisabledButtons(){
@@ -33,10 +34,10 @@ public class DriverGamepad extends Gamepad{
     }
 
     public double getDriveThrottle(){
-        return this.gamepad.leftStick.getY();
+        return throttleCurve.calculateMappedVal(this.gamepad.leftStick.getY());
     }
 
     public double getDriveSteering(){
-        return this.gamepad.rightStick.getX();
+        return steeringCurve.calculateMappedVal(this.gamepad.rightStick.getX());
     }
 }

@@ -2,7 +2,6 @@ package frc.robot.drivetrain.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.drivetrain.Drivetrain;
 
 public class DriveDistance extends CommandBase {
   private final double m_distance;
@@ -26,7 +25,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void initialize() {
     Robot.drivetrain.arcadeDrive(0, 0);
-    Robot.drivetrain.resetOdometry();
+    Robot.drivetrain.odometry.resetOdometry();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,6 +44,6 @@ public class DriveDistance extends CommandBase {
   @Override
   public boolean isFinished() {
     // Compare distance travelled from start to desired distance
-    return Math.abs(Robot.drivetrain.getAverageDistanceInch()) >= m_distance;
+    return Math.abs(Robot.drivetrain.odometry.getAverageDistanceInch()) >= m_distance;
   }
 }

@@ -66,6 +66,6 @@ public class BlinkLEDCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return commandScheduleTime + 5000 <= System.currentTimeMillis();
+    return false;
   }
 }

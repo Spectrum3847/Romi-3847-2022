@@ -2,7 +2,6 @@ package frc.robot.drivetrain.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.drivetrain.Drivetrain;
 
 public class DriveTime extends CommandBase {
   private final double m_duration;

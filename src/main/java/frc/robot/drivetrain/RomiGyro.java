@@ -117,4 +117,13 @@ public class RomiGyro {
       m_angleZOffset = m_simAngleZ.get();
     }
   }
+
+    /** Set the gyro angles to angle. */
+    public void set(double angle) {
+      if (m_simAngleX != null) {
+        m_angleXOffset = m_simAngleX.get() - angle;
+        m_angleYOffset = m_simAngleY.get() - angle;
+        m_angleZOffset = m_simAngleZ.get() - angle;
+      }
+    }
 }
