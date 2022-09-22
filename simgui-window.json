@@ -6,8 +6,8 @@
       "style": "0",
       "userScale": "2",
       "width": "1600",
-      "xpos": "129",
-      "ypos": "114"
+      "xpos": "126",
+      "ypos": "31"
     }
   },
   "Window": {
@@ -55,6 +55,11 @@
       "Collapsed": "0",
       "Pos": "1164,692",
       "Size": "110,135"
+    },
+    "###Solenoids": {
+      "Collapsed": "0",
+      "Pos": "1362,636",
+      "Size": "169,54"
     },
     "###System Joysticks": {
       "Collapsed": "0",

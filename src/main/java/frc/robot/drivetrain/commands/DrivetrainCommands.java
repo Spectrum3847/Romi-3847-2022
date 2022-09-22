@@ -13,8 +13,8 @@ public class DrivetrainCommands {
     
     public static void setupDefaultCommand(){
         Robot.drivetrain.setDefaultCommand(
-            new RunCommand(() -> Robot.drivetrain.arcadeDrive(Robot.driverGamepad.getDriveThrottle(), 
-                                Robot.driverGamepad.getDriveSteering()), 
+            new RunCommand(() -> Robot.drivetrain.arcadeDrive(Robot.pilotGamepad.getDriveThrottle(), 
+                                Robot.pilotGamepad.getDriveSteering()), 
                                 Robot.drivetrain));
     }
 

@@ -1,6 +1,6 @@
 package frc.lib.subsystems;
 
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+//import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.drivers.SpectrumSolenoid;
@@ -10,7 +10,7 @@ public class SolenoidSubsystem extends SubsystemBase{
 
     public SolenoidSubsystem(String name, int port){
       setName(name);
-      solenoid = new SpectrumSolenoid(PneumaticsModuleType.REVPH, port);
+      solenoid = new SpectrumSolenoid(port); //PneumaticsModuleType.REVPH, port);
 
       //Default to down
       this.setDefaultCommand(new RunCommand(() -> off(), this));

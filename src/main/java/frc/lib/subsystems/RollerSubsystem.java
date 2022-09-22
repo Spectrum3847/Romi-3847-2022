@@ -7,28 +7,24 @@ package frc.lib.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class RollerSubsystem extends SubsystemBase {
 
   public WPI_TalonFX motorLeader;
+  public TalonFXSimCollection motorSim;
 
+  // motorLeader = new WPI_TalonFX(0); // Replace with correct CAN ID
+  // RollerConstantsConfig.setupRollerFalconLeader(motorLeader);
 
-  public RollerSubsystem() {
-    //motorLeader = new WPI_TalonFX(0); // Replace with correct CAN ID
-    //RollerConstantsConfig.setupRollerFalconLeader(motorLeader);
-
-    /* Example for follower
-     motorFollower = new WPI_TalonFX(1); //Replace with correct CAN ID
-     RollerFalconConfig.setupRollerFalconFollower(motorFollower, motorLeader);
-     */
-    
-    setDefaultCommand(new RunCommand(() -> this.stop(), this));
-  } 
-  
+  /*
+   * Example for follower
+   * motorFollower = new WPI_TalonFX(1); //Replace with correct CAN ID
+   * RollerFalconConfig.setupRollerFalconFollower(motorFollower, motorLeader);
+   */
 
   @Override
   public void periodic() {
@@ -61,16 +57,16 @@ public abstract class RollerSubsystem extends SubsystemBase {
     return (motorLeader.getSelectedSensorVelocity() / 2048) * 10;
   }
 
-  //Return RPM velocity
-  public double getRPM(){
+  // Return RPM velocity
+  public double getRPM() {
     return getRotationPerSec() * 60;
   }
 
   public void resetEncoder() {
     motorLeader.setSelectedSensorPosition(0);
   }
-  
-  public double getCurrent(){
+
+  public double getCurrent() {
     return motorLeader.getSupplyCurrent();
   }
 

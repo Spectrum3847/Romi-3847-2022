@@ -34,23 +34,53 @@
       }
     },
     "Other Devices": {
-      "AnalogGyro[0]": {
+      "Talon FX[20]": {
         "header": {
           "open": true
         }
       },
-      "BuiltInAccel": {
+      "Talon FX[20]/Integrated Sensor": {
         "header": {
           "open": true
         }
       },
-      "RomiGyro": {
+      "Talon SRX[21]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Analog In": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Pulse Width Input": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Quad Encoder": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Rev Limit": {
         "header": {
           "open": true
         }
       }
     },
     "PWM Outputs": {
+      "window": {
+        "visible": true
+      }
+    },
+    "Solenoids": {
       "window": {
         "visible": true
       }

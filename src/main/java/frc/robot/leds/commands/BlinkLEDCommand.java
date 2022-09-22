@@ -15,9 +15,6 @@ public class BlinkLEDCommand extends CommandBase {
   int r, g, b;
   boolean on = true;
 
-  /** Dont use this */
-  public BlinkLEDCommand() {}
-
   public BlinkLEDCommand(LEDs ledSubsystem, int waitTime, int r, int g, int b) {
     this.ledSubsystem = ledSubsystem;
     this.startTime = System.currentTimeMillis();
@@ -26,6 +23,10 @@ public class BlinkLEDCommand extends CommandBase {
     this.g = g;
     this.b = b;
     addRequirements(ledSubsystem);
+  }
+
+  public boolean runsWhenDisabled() {
+    return true;
   }
 
   // Called when the command is initially scheduled.
@@ -61,7 +62,8 @@ public class BlinkLEDCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

@@ -1,8 +1,5 @@
 package frc.robot.auton;
 
-import com.pathplanner.lib.PathPlanner;
-
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -10,9 +7,7 @@ import frc.robot.Robot;
 import frc.robot.auton.commands.AutonCommands;
 import frc.robot.auton.commands.AutonDistance;
 import frc.robot.auton.commands.AutonTime;
-import frc.robot.auton.commands.FollowTrajectory;
-import frc.robot.drivetrain.DrivetrainConstants;
-import frc.robot.drivetrain.commands.DrivetrainCommands;
+import frc.robot.auton.commands.FiveBall;
 
 public class AutonSetup {
     public static final SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -20,11 +15,11 @@ public class AutonSetup {
 
     // A chooser for autonomous commands
     public static void setupSelectors() {
-        autonChooser.setDefaultOption("3mFWD", AutonCommands.followIntiTrajectory("3mFWD"));
+        autonChooser.setDefaultOption("3mFWD", AutonCommands.followIntialPath("3mFWD"));
         autonChooser.addOption("AutonTime", new AutonTime());
         autonChooser.addOption("autonDistance", new AutonDistance());
         autonChooser.addOption("Nothing", new PrintCommand("DO NOTHING AUTON RUNNING"));
-        autonChooser.addOption("Five_Ball", AutonCommands.fiveBallAuton());
+        autonChooser.addOption("Five_Ball", new FiveBall());
     }
 
     /**
