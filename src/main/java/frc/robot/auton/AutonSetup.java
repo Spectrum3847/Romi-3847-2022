@@ -17,20 +17,14 @@ import frc.robot.drivetrain.commands.DrivetrainCommands;
 public class AutonSetup {
     public static final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
-    // AutoRoutines
-    private static final Command autonTime = new AutonTime();
-    private static final Command autonDistance = new AutonDistance();
-    private static final Trajectory examplePath = PathPlanner.loadPath("3mFWD", DrivetrainConstants.kMaxSpeed,
-            DrivetrainConstants.kMaxAccel);
-    private static final Command oneMeter = AutonCommands.intializePathFollowing(examplePath)
-            .andThen(new FollowTrajectory(examplePath).andThen(DrivetrainCommands.stop()));
 
     // A chooser for autonomous commands
     public static void setupSelectors() {
-        autonChooser.setDefaultOption("AutonTime", autonTime);
-        autonChooser.addOption("autonDistance", autonDistance);
+        autonChooser.setDefaultOption("3mFWD", AutonCommands.followIntiTrajectory("3mFWD"));
+        autonChooser.addOption("AutonTime", new AutonTime());
+        autonChooser.addOption("autonDistance", new AutonDistance());
         autonChooser.addOption("Nothing", new PrintCommand("DO NOTHING AUTON RUNNING"));
-        autonChooser.addOption("oneMeter", oneMeter);
+        autonChooser.addOption("Five_Ball", AutonCommands.fiveBallAuton());
     }
 
     /**
