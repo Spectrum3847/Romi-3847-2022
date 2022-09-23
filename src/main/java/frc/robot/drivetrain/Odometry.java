@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.util.Conversions;
+import frc.SpectrumLib.util.Conversions;
 import frc.robot.Robot;
 
-/** Add your docs here. */
+/**
+ * This class keeps track of encoders and gyros to allow us to estimate the location of the robot
+ */
 public class Odometry {
 
     private final Drivetrain drivetrain;
@@ -36,28 +38,31 @@ public class Odometry {
     public final Field2d fieldSim = new Field2d();
 
     // Field Odometry and Simulation things
-    public final DifferentialDriveOdometry diffOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
+    public final DifferentialDriveOdometry diffOdometry =
+            new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
 
     public Odometry(Drivetrain dt) {
         drivetrain = dt;
         // Use meters as unit for encoder distances
-        leftEncoder.setDistancePerPulse((2 * Math.PI * DrivetrainConstants.kWheelRadius)
-                / DrivetrainConstants.kCountsPerRevolution);
-        rightEncoder.setDistancePerPulse((2 * Math.PI * DrivetrainConstants.kWheelRadius)
-                / DrivetrainConstants.kCountsPerRevolution);
+        leftEncoder.setDistancePerPulse(
+                (2 * Math.PI * DrivetrainConstants.kWheelRadius)
+                        / DrivetrainConstants.kCountsPerRevolution);
+        rightEncoder.setDistancePerPulse(
+                (2 * Math.PI * DrivetrainConstants.kWheelRadius)
+                        / DrivetrainConstants.kCountsPerRevolution);
 
-        SmartDashboard.putData("Field", fieldSim); // This is how we can see the robot position on the field
-        fieldSim.getObject("trajectory").setPose(new Pose2d()); //Set the intial pose for the trajectory, lets you edit settings
+        SmartDashboard.putData(
+                "Field", fieldSim); // This is how we can see the robot position on the field
+        fieldSim.getObject("trajectory")
+                .setPose(new Pose2d()); // Set the intial pose for the trajectory, lets you edit
+        // settings
     }
 
-
-    public void plotTrajectory(Trajectory trajectory){
+    public void plotTrajectory(Trajectory trajectory) {
         fieldSim.getObject("trajectory").setTrajectory(trajectory);
     }
-    /**
-     * Update robot odometry. Odometry is the estimate of robot postion from
-     * encoders and gyro
-     */
+
+    /** Update robot odometry. Odometry is the estimate of robot postion from encoders and gyro */
     public void updateOdometry() {
         Rotation2d angle;
         if (Robot.romiConnected) {
@@ -65,12 +70,11 @@ public class Odometry {
         } else { // If we are just simulating the drivetrain
             angle = m_gyro.getRotation2d();
         }
-        diffOdometry.update(
-                angle, leftEncoder.getDistance(), rightEncoder.getDistance());
+        diffOdometry.update(angle, leftEncoder.getDistance(), rightEncoder.getDistance());
         fieldSim.setRobotPose(diffOdometry.getPoseMeters());
     }
 
-    /** Resets robot odometry to a pose*/
+    /** Resets robot odometry to a pose */
     public void resetOdometry(Pose2d pose) {
         leftEncoder.reset();
         rightEncoder.reset();

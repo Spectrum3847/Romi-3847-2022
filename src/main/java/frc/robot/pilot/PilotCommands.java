@@ -7,14 +7,13 @@ import frc.robot.Robot;
 /** Add your docs here. */
 public class PilotCommands {
 
-    /**Set default command to turn off the rumble */
+    /** Set default command to turn off the rumble */
     public static void setupDefaultCommand() {
         Robot.pilotGamepad.setDefaultCommand(rumblePilot(0));
     }
 
-    /**Command that can be used to rumble the pilot controller */
-    public static Command rumblePilot(double intensity){
-        return new RunCommand(() -> Robot.pilotGamepad.rumble(intensity),
-        Robot.pilotGamepad);
+    /** Command that can be used to rumble the pilot controller */
+    public static Command rumblePilot(double intensity) {
+        return new RunCommand(() -> Robot.pilotGamepad.rumble(intensity), Robot.pilotGamepad);
     }
 }

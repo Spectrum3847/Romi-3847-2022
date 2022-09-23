@@ -23,7 +23,6 @@ public class ElevatorConstants {
 
     // distance per pulse = (distance per revolution) / (pulses per revolution)
     // = (Pi * D) / ppr
-    public static final double kElevatorEncoderDistPerPulse = 2.0 * Math.PI * ElevatorConstants.kElevatorDrumRadius
-            / 4096;
-
+    public static final double kElevatorEncoderDistPerPulse =
+            2.0 * Math.PI * ElevatorConstants.kElevatorDrumRadius / 4096;
 }
