@@ -5,7 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
-import frc.lib.telemetry.TelemetrySubsystem;
+import frc.SpectrumLib.telemetry.TelemetrySubsystem;
 import frc.robot.auton.AutonSetup;
 
 /** Add your docs here. */

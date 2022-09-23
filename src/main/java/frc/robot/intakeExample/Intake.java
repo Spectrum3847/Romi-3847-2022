@@ -5,9 +5,9 @@
 package frc.robot.intakeExample;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import frc.lib.sim.PhysicsSim;
-import frc.lib.subsystems.RollerSubsystem;
-import frc.lib.subsystems.SolenoidSubsystem;
+import frc.SpectrumLib.sim.PhysicsSim;
+import frc.SpectrumLib.subsystems.RollerSubsystem;
+import frc.SpectrumLib.subsystems.SolenoidSubsystem;
 import frc.robot.RobotConstants;
 import frc.robot.RobotConstants.MotorIDs;
 import frc.robot.RobotConstants.SolenoidPorts;

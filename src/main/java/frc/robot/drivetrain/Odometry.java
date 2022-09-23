@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.util.Conversions;
+import frc.SpectrumLib.util.Conversions;
 import frc.robot.Robot;
 
 /**

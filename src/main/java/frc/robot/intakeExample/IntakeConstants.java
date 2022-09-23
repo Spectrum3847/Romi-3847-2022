@@ -1,7 +1,7 @@
 package frc.robot.intakeExample;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import frc.lib.subsystems.RollerConstants;
+import frc.SpectrumLib.subsystems.RollerConstants;
 
 /** Add your docs here. */
 public class IntakeConstants extends RollerConstants {

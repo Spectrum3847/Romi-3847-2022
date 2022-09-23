@@ -1,7 +1,7 @@
 package frc.robot.pilot;
 
-import frc.lib.gamepads.Gamepad;
-import frc.lib.gamepads.mapping.ExpCurve;
+import frc.SpectrumLib.gamepads.Gamepad;
+import frc.SpectrumLib.gamepads.mapping.ExpCurve;
 import frc.robot.elevatorSim.ElevatorCommands;
 import frc.robot.intakeExample.IntakeCommands;
 
