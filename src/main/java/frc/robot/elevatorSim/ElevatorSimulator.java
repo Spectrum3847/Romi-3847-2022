@@ -56,14 +56,18 @@ public class ElevatorSimulator {
         // Next, we update it. The standard loop time is 20ms.
         m_elevatorSim.update(0.020);
 
-        // Finally, we set our simulated encoder's readings and simulated battery
-        // voltage
-        m_encoderSim.setDistance(m_elevatorSim.getPositionMeters());
         // SimBattery estimates loaded battery voltages
         RoboRioSim.setVInVoltage(
                 BatterySim.calculateDefaultBatteryLoadedVoltage(m_elevatorSim.getCurrentDrawAmps()));
 
         // Update elevator visualization with simulated position
-        m_elevatorMech2d.setLength(Units.metersToInches(m_elevatorSim.getPositionMeters()));
+        double position = m_elevatorSim.getPositionMeters();
+        if (position < 0.03) {
+            position = 0;
+        }
+        // Finally, we set our simulated encoder's readings and simulated battery
+        // voltage
+        m_encoderSim.setDistance(position);
+        m_elevatorMech2d.setLength(Units.metersToInches(position));
     }
 }
