@@ -10,15 +10,18 @@ import frc.robot.Robot;
 
 /** Add your docs here. */
 public class DrivetrainCommands {
-    
-    public static void setupDefaultCommand(){
+
+    public static void setupDefaultCommand() {
         Robot.drivetrain.setDefaultCommand(
-            new RunCommand(() -> Robot.drivetrain.arcadeDrive(Robot.pilotGamepad.getDriveThrottle(), 
-                                Robot.pilotGamepad.getDriveSteering()), 
-                                Robot.drivetrain));
+                new RunCommand(
+                        () ->
+                                Robot.drivetrain.arcadeDrive(
+                                        Robot.pilotGamepad.getDriveThrottle(),
+                                        Robot.pilotGamepad.getDriveSteering()),
+                        Robot.drivetrain));
     }
 
-    public static Command stop(){
+    public static Command stop() {
         return new RunCommand(() -> Robot.drivetrain.stop(), Robot.drivetrain);
     }
 }

@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 /**
@@ -15,16 +11,15 @@ package frc.robot;
 public final class RobotConstants {
 
     public static final String Canivore = "3847";
-    
-    public static final class MotorIDs{
+
+    public static final class MotorIDs {
         public static final int driveMotorLeft = 0;
         public static final int driveMotorRight = 1;
         public static final int elevatorMotor = 9;
         public static final int intakeMotor = 20;
     }
 
-    public static final class SolenoidPorts{
+    public static final class SolenoidPorts {
         public static final int kIntakeDown = 0;
     }
-
 }

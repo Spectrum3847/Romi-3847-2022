@@ -12,7 +12,6 @@ import frc.robot.auton.commands.FiveBall;
 public class AutonSetup {
     public static final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
-
     // A chooser for autonomous commands
     public static void setupSelectors() {
         autonChooser.setDefaultOption("3mFWD", AutonCommands.followIntialPath("3mFWD"));

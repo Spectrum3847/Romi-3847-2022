@@ -11,15 +11,15 @@ import frc.robot.Robot;
 /** Add your docs here. */
 public class ElevatorCommands {
 
-    public static void setupDefaultCommand(){
+    public static void setupDefaultCommand() {
         Robot.elevator.setDefaultCommand(stop());
     }
 
-    public static Command goToHeight(int height){
+    public static Command goToHeight(int height) {
         return new RunCommand(() -> Robot.elevator.goToTarget(height), Robot.elevator);
     }
 
-    public static Command stop(){
+    public static Command stop() {
         return new RunCommand(() -> Robot.elevator.stop(), Robot.elevator);
     }
 }

@@ -1,7 +1,6 @@
 package frc.robot.intakeExample;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-
 import frc.lib.subsystems.RollerConstants;
 
 /** Add your docs here. */
@@ -26,8 +25,12 @@ public class IntakeConstants extends RollerConstants {
         tirggerThresholdLimit = 45;
         PeakCurrentDuration = 0.5;
         EnableCurrentLimit = true;
-        supplyLimit = new SupplyCurrentLimitConfiguration(
-                EnableCurrentLimit, currentLimit, tirggerThresholdLimit, PeakCurrentDuration);
+        supplyLimit =
+                new SupplyCurrentLimitConfiguration(
+                        EnableCurrentLimit,
+                        currentLimit,
+                        tirggerThresholdLimit,
+                        PeakCurrentDuration);
 
         setConfig();
     }

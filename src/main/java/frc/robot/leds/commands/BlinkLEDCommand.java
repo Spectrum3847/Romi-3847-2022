@@ -8,66 +8,65 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.leds.LEDs;
 
 public class BlinkLEDCommand extends CommandBase {
-  LEDs ledSubsystem;
-  long commandScheduleTime;
-  long startTime;
-  int waitTime;
-  int r, g, b;
-  boolean on = true;
+    LEDs ledSubsystem;
+    long commandScheduleTime;
+    long startTime;
+    int waitTime;
+    int r, g, b;
+    boolean on = true;
 
-  public BlinkLEDCommand(LEDs ledSubsystem, int waitTime, int r, int g, int b) {
-    this.ledSubsystem = ledSubsystem;
-    this.startTime = System.currentTimeMillis();
-    this.waitTime = waitTime;
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    addRequirements(ledSubsystem);
-  }
-
-  public boolean runsWhenDisabled() {
-    return true;
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
-      ledSubsystem.setRGB(i, r, g, b);
+    public BlinkLEDCommand(LEDs ledSubsystem, int waitTime, int r, int g, int b) {
+        this.ledSubsystem = ledSubsystem;
+        this.startTime = System.currentTimeMillis();
+        this.waitTime = waitTime;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        addRequirements(ledSubsystem);
     }
-    ledSubsystem.sendData();
-    commandScheduleTime = System.currentTimeMillis();
-  }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    if (System.currentTimeMillis() - startTime >= waitTime) {
-      if (on) {
+    public boolean runsWhenDisabled() {
+        return true;
+    }
+
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
         for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
-          ledSubsystem.setRGB(i, 0, 0, 0);
+            ledSubsystem.setRGB(i, r, g, b);
         }
         ledSubsystem.sendData();
-        on = false;
-      } else {
-        for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
-          ledSubsystem.setRGB(i, r, g, b);
-        }
-        ledSubsystem.sendData();
-        on = true;
-      }
-      startTime = System.currentTimeMillis();
+        commandScheduleTime = System.currentTimeMillis();
     }
-  }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        if (System.currentTimeMillis() - startTime >= waitTime) {
+            if (on) {
+                for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
+                    ledSubsystem.setRGB(i, 0, 0, 0);
+                }
+                ledSubsystem.sendData();
+                on = false;
+            } else {
+                for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
+                    ledSubsystem.setRGB(i, r, g, b);
+                }
+                ledSubsystem.sendData();
+                on = true;
+            }
+            startTime = System.currentTimeMillis();
+        }
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

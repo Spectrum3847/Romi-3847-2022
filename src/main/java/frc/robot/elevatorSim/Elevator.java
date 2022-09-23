@@ -11,40 +11,42 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
 
-  // Standard classes for controlling our elevator
-  public final PIDController m_controller = new PIDController(ElevatorConstants.kElevatorKp, 0, 0);
-  public final Encoder m_encoder = new Encoder(ElevatorConstants.kEncoderAChannel, ElevatorConstants.kEncoderBChannel);
-  public final PWMSparkMax m_motor = new PWMSparkMax(ElevatorConstants.kMotorPort);
-  public final ElevatorSimulator elevatorSim;
+    // Standard classes for controlling our elevator
+    public final PIDController m_controller =
+            new PIDController(ElevatorConstants.kElevatorKp, 0, 0);
+    public final Encoder m_encoder =
+            new Encoder(ElevatorConstants.kEncoderAChannel, ElevatorConstants.kEncoderBChannel);
+    public final PWMSparkMax m_motor = new PWMSparkMax(ElevatorConstants.kMotorPort);
+    public final ElevatorSimulator elevatorSim;
 
-  /** Creates a new ElevatorSim. */
-  public Elevator() {
-    m_encoder.setDistancePerPulse(ElevatorConstants.kElevatorEncoderDistPerPulse);
+    /** Creates a new ElevatorSim. */
+    public Elevator() {
+        m_encoder.setDistancePerPulse(ElevatorConstants.kElevatorEncoderDistPerPulse);
 
-    //Used for simulation
-    elevatorSim = new ElevatorSimulator(this);
-  }
+        // Used for simulation
+        elevatorSim = new ElevatorSimulator(this);
+    }
 
-  public void setOutput(double speed) {
-    m_motor.set(speed);
-  }
+    public void setOutput(double speed) {
+        m_motor.set(speed);
+    }
 
-  public void goToTarget(int height) {
-    double pidOutput = m_controller.calculate(m_encoder.getDistance(), height);
-    m_motor.setVoltage(pidOutput);
-  }
+    public void goToTarget(int height) {
+        double pidOutput = m_controller.calculate(m_encoder.getDistance(), height);
+        m_motor.setVoltage(pidOutput);
+    }
 
-  public void stop() {
-    m_motor.stopMotor();
-  }
+    public void stop() {
+        m_motor.stopMotor();
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 
-  @Override
-  public void simulationPeriodic() {
-    elevatorSim.simulationPeriodic();
-  }
+    @Override
+    public void simulationPeriodic() {
+        elevatorSim.simulationPeriodic();
+    }
 }

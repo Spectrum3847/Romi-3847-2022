@@ -1,4 +1,4 @@
-//Spectrum 3847
+// Spectrum 3847
 package frc.lib.vision;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.Notifier;
 import frc.lib.vision.LimeLightControlModes.*;
 
 /**
-*   Lime Light Class was started by Corey Applegate of Team 3244
-*   Granite City Gearheads. We Hope you Enjoy the Lime Light
-*   Camera. 
-*/
+ * Lime Light Class was started by Corey Applegate of Team 3244 Granite City Gearheads. We Hope you
+ * Enjoy the Lime Light Camera.
+ */
 public class LimeLight {
 
     private NetworkTable m_table;
@@ -20,69 +19,65 @@ public class LimeLight {
     private double _hearBeatPeriod = 0.1;
 
     class PeriodicRunnable implements java.lang.Runnable {
-	    public void run() {
+        public void run() {
             resetPilelineLatency();
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(getPipelineLatency()==0.0){
+            if (getPipelineLatency() == 0.0) {
                 isConnected = false;
-            }else{
+            } else {
                 isConnected = true;
             }
         }
     }
+
     Notifier _hearBeat = new Notifier(new PeriodicRunnable());
-   
-    /**
-     * Using the Default Lime Light NT table
-     */
+
+    /** Using the Default Lime Light NT table */
     public LimeLight() {
         m_tableName = "limelight";
         m_table = NetworkTableInstance.getDefault().getTable(m_tableName);
         _hearBeat.startPeriodic(_hearBeatPeriod);
     }
 
-    /**
-     * If you changed the name of your Lime Light tell Me the New Name
-     */
+    /** If you changed the name of your Lime Light tell Me the New Name */
     public LimeLight(String tableName) {
         m_tableName = tableName;
         m_table = NetworkTableInstance.getDefault().getTable(m_tableName);
         _hearBeat.startPeriodic(_hearBeatPeriod);
     }
 
-    /**
-     * Send an instance of the NetworkTabe
-     */
+    /** Send an instance of the NetworkTabe */
     public LimeLight(NetworkTable table) {
         m_table = table;
         _hearBeat.startPeriodic(_hearBeatPeriod);
-       
     }
 
-    //This is a test
-    public boolean isConnected(){
+    // This is a test
+    public boolean isConnected() {
         return isConnected;
     }
 
     /**
-     * tv   Whether the limelight has any valid targets (0 or 1)
+     * tv Whether the limelight has any valid targets (0 or 1)
+     *
      * @return
      */
     public boolean getIsTargetFound() {
         NetworkTableEntry tv = m_table.getEntry("tv");
         double v = tv.getDouble(0);
-        if (v == 0.0f){
+        if (v == 0.0f) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
     /**
      * tx Horizontal Offset From Crosshair To Target (-27 degrees to 27 degrees)
+     *
      * @return
      */
     public double getdegRotationToTarget() {
@@ -92,7 +87,8 @@ public class LimeLight {
     }
     /**
      * ty Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
-     * @return 
+     *
+     * @return
      */
     public double getdegVerticalToTarget() {
         NetworkTableEntry ty = m_table.getEntry("ty");
@@ -101,6 +97,7 @@ public class LimeLight {
     }
     /**
      * ta Target Area (0% of image to 100% of image)
+     *
      * @return
      */
     public double getTargetArea() {
@@ -110,6 +107,7 @@ public class LimeLight {
     }
     /**
      * ts Skew or rotation (-90 degrees to 0 degrees)
+     *
      * @return
      */
     public double getSkew_Rotation() {
@@ -119,6 +117,7 @@ public class LimeLight {
     }
     /**
      * tl The pipeline’s latency contribution (ms) Add at least 11ms for image capture latency.
+     *
      * @return
      */
     public double getPipelineLatency() {
@@ -127,25 +126,25 @@ public class LimeLight {
         return l;
     }
 
-    private void resetPilelineLatency(){
+    private void resetPilelineLatency() {
         m_table.getEntry("tl").setValue(0.0);
     }
-    //Setters
-    
+    // Setters
+
     /**
-     * LedMode  Sets limelight’s LED state
-     * 
-     *  kon
-     *  koff
-     *  kblink
+     * LedMode Sets limelight’s LED state
+     *
+     * <p>kon koff kblink
+     *
      * @param ledMode
      */
-     public void setLEDMode(LedMode ledMode) {
+    public void setLEDMode(LedMode ledMode) {
         m_table.getEntry("ledMode").setValue(ledMode.getValue());
     }
 
     /**
      * Returns current LED mode of the Lime Light
+     *
      * @return LedMode
      */
     public LedMode getLEDMode() {
@@ -154,21 +153,21 @@ public class LimeLight {
         LedMode mode = LedMode.getByValue(led);
         return mode;
     }
-    
+
     /**
-     * camMode  Sets limelight’s operation mode
-     * 
-     *  kvision
-     *  kdriver (Increases exposure, disables vision processing)
+     * camMode Sets limelight’s operation mode
+     *
+     * <p>kvision kdriver (Increases exposure, disables vision processing)
+     *
      * @param camMode
      */
-    
     public void setCamMode(CamMode camMode) {
         m_table.getEntry("camMode").setValue(camMode.getValue());
     }
 
     /**
      * Returns current Cam mode of the Lime Light
+     *
      * @return CamMode
      */
     public CamMode getCamMode() {
@@ -178,19 +177,18 @@ public class LimeLight {
         return mode;
     }
 
-
-     /**
+    /**
      * pipeline Sets limelight’s current pipeline
-     * 
-     * 0 . 9	Select pipeline 0.9
-     * 
+     *
+     * <p>0 . 9 Select pipeline 0.9
+     *
      * @param pipeline
      */
     public void setPipeline(Integer pipeline) {
-        if(pipeline<0){
+        if (pipeline < 0) {
             pipeline = 0;
             throw new IllegalArgumentException("Pipeline can not be less than zero");
-        }else if(pipeline>9){
+        } else if (pipeline > 9) {
             pipeline = 9;
             throw new IllegalArgumentException("Pipeline can not be greater than nine");
         }
@@ -199,9 +197,10 @@ public class LimeLight {
 
     /**
      * Returns current Pipeling of the Lime Light
+     *
      * @return Pipelinge
      */
-    public double getPipeline(){
+    public double getPipeline() {
         NetworkTableEntry pipeline = m_table.getEntry("pipeline");
         double pipe = pipeline.getDouble(0.0);
         return pipe;
@@ -209,23 +208,25 @@ public class LimeLight {
 
     /**
      * Returns current Pipeling of the Lime Light
+     *
      * @return Pipelinge
      */
-    public Integer getPipelineInt(){
+    public Integer getPipelineInt() {
         NetworkTableEntry pipeline = m_table.getEntry("pipeline");
         Integer pipe = (int) pipeline.getDouble(0.0);
         return pipe;
     }
 
     /**
-     * stream   Sets limelight’s streaming mode
-     * 
-     * kStandard - Side-by-side streams if a webcam is attached to Limelight
-     * kPiPMain - The secondary camera stream is placed in the lower-right corner of the primary camera stream
-     * kPiPSecondary - The primary camera stream is placed in the lower-right corner of the secondary camera stream
-     * 
+     * stream Sets limelight’s streaming mode
+     *
+     * <p>kStandard - Side-by-side streams if a webcam is attached to Limelight kPiPMain - The
+     * secondary camera stream is placed in the lower-right corner of the primary camera stream
+     * kPiPSecondary - The primary camera stream is placed in the lower-right corner of the
+     * secondary camera stream
+     *
      * @param stream
-     */ 
+     */
     public void setStream(StreamType stream) {
         m_table.getEntry("stream").setValue(stream.getValue());
     }
@@ -237,12 +238,11 @@ public class LimeLight {
         return mode;
     }
 
-
     /**
      * snapshot Allows users to take snapshots during a match
-     * 
-     * kon - Stop taking snapshots
-     * koff - Take two snapshots per second
+     *
+     * <p>kon - Stop taking snapshots koff - Take two snapshots per second
+     *
      * @param snapshot
      */
     public void setSnapshot(Snapshot snapshot) {
@@ -252,18 +252,17 @@ public class LimeLight {
     public Snapshot getSnapshot() {
         NetworkTableEntry snapshot = m_table.getEntry("snapshot");
         double snshot = snapshot.getDouble(0.0);
-        Snapshot mode = Snapshot.getByValue(snshot );        
+        Snapshot mode = Snapshot.getByValue(snshot);
         return mode;
     }
 
-    // *************** Advanced Usage with Raw Contours *********************   
+    // *************** Advanced Usage with Raw Contours *********************
 
     /**
-     * Limelight posts three raw contours to NetworkTables that are not influenced by your grouping mode. 
-     * That is, they are filtered with your pipeline parameters, but never grouped. X and Y are returned 
-     * in normalized screen space (-1 to 1) rather than degrees.	 * 
+     * Limelight posts three raw contours to NetworkTables that are not influenced by your grouping
+     * mode. That is, they are filtered with your pipeline parameters, but never grouped. X and Y
+     * are returned in normalized screen space (-1 to 1) rather than degrees. *
      */
-
     public double getAdvanced_RotationToTarget(Advanced_Target raw) {
         NetworkTableEntry txRaw = m_table.getEntry("tx" + Integer.toString(raw.getValue()));
         double x = txRaw.getDouble(0.0);
@@ -281,22 +280,23 @@ public class LimeLight {
         double a = taRaw.getDouble(0.0);
         return a;
     }
-    
+
     public double getAdvanced_Skew_Rotation(Advanced_Target raw) {
         NetworkTableEntry tsRaw = m_table.getEntry("ts" + Integer.toString(raw.getValue()));
         double s = tsRaw.getDouble(0.0);
         return s;
     }
 
-    //Raw Crosshairs:
-    //If you are using raw targeting data, you can still utilize your calibrated crosshairs:
-    
-    public double[] getAdvanced_RawCrosshair(Advanced_Crosshair raw){
+    // Raw Crosshairs:
+    // If you are using raw targeting data, you can still utilize your calibrated crosshairs:
+
+    public double[] getAdvanced_RawCrosshair(Advanced_Crosshair raw) {
         double[] crosshars = new double[2];
         crosshars[0] = getAdvanced_RawCrosshair_X(raw);
         crosshars[1] = getAdvanced_RawCrosshair_Y(raw);
         return crosshars;
     }
+
     public double getAdvanced_RawCrosshair_X(Advanced_Crosshair raw) {
         NetworkTableEntry cxRaw = m_table.getEntry("cx" + Integer.toString(raw.getValue()));
         double x = cxRaw.getDouble(0.0);
