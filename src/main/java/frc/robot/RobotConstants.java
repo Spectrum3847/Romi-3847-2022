@@ -17,6 +17,7 @@ public final class RobotConstants {
         public static final int driveMotorRight = 1;
         public static final int elevatorMotor = 9;
         public static final int intakeMotor = 20;
+        public static final int armMotor = 21;
     }
 
     public static final class SolenoidPorts {
