@@ -45,11 +45,9 @@ public class Odometry {
         drivetrain = dt;
         // Use meters as unit for encoder distances
         leftEncoder.setDistancePerPulse(
-                (2 * Math.PI * DrivetrainConstants.kWheelRadius)
-                        / DrivetrainConstants.kCountsPerRevolution);
+                (2 * Math.PI * dt.config.kWheelRadius) / dt.config.kCountsPerRevolution);
         rightEncoder.setDistancePerPulse(
-                (2 * Math.PI * DrivetrainConstants.kWheelRadius)
-                        / DrivetrainConstants.kCountsPerRevolution);
+                (2 * Math.PI * dt.config.kWheelRadius) / dt.config.kCountsPerRevolution);
 
         SmartDashboard.putData(
                 "Field", fieldSim); // This is how we can see the robot position on the field

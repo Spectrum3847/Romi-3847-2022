@@ -107,6 +107,7 @@
       "/Shuffleboard/Main/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/Elevator Sim": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Scheduler": "Scheduler",
       "/SmartDashboard/SendableChooser[0]": "String Chooser"
     },
     "windows": {
@@ -147,6 +148,11 @@
         "width": 16.399999618530273,
         "window": {
           "name": "RapidReact",
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Scheduler": {
+        "window": {
           "visible": true
         }
       }

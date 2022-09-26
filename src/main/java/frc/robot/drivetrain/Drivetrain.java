@@ -3,14 +3,15 @@ package frc.robot.drivetrain;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotConstants;
+import frc.robot.Robot;
 
 public class Drivetrain extends SubsystemBase {
+    public DrivetrainConfig config;
 
     // The Romi has the left and right motors set to
     // PWM channels 0 and 1 respectively
-    public final Spark leftMotor = new Spark(RobotConstants.MotorIDs.driveMotorLeft);
-    public final Spark rightMotor = new Spark(RobotConstants.MotorIDs.driveMotorRight);
+    public final Spark leftMotor = new Spark(Robot.config.motors.driveMotorLeft);
+    public final Spark rightMotor = new Spark(Robot.config.motors.driveMotorRight);
 
     // Set up the differential drive controller
     public final DifferentialDrive diffDrive = new DifferentialDrive(leftMotor, rightMotor);
@@ -21,6 +22,7 @@ public class Drivetrain extends SubsystemBase {
 
     /** Creates a new Drivetrain. */
     public Drivetrain() {
+        config = new DrivetrainConfig();
         // We need to invert one side of the drivetrain so that positive voltages
         // result in both sides moving forward. Depending on how your robot's
         // gearbox is constructed, you might have to invert the left side instead.

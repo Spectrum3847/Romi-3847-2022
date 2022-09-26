@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.drivetrain.DrivetrainConstants;
 
 /** These commands are used to build Auton Routines */
 public class AutonCommands {
@@ -14,7 +13,7 @@ public class AutonCommands {
     /** Load the PathPlanner Trajectory from the path name, uses default MaxSpeed and MaxAccel */
     public static Trajectory getTrajectory(String pathName) {
         return getTrajectory(
-                pathName, DrivetrainConstants.kMaxSpeed, DrivetrainConstants.kMaxAccel);
+                pathName, Robot.drivetrain.config.kMaxSpeed, Robot.drivetrain.config.kMaxAccel);
     }
 
     /** Load the PathPlanner Trajectory from the path name, maxSpeed, and maxAccel */

@@ -24,29 +24,33 @@ public class ElevatorSimulator {
     private final DCMotor m_elevatorGearbox = DCMotor.getVex775Pro(4);
 
     // Simulation classes help us simulate what's going on, including gravity.
-    private final ElevatorSim m_elevatorSim =
-            new ElevatorSim(
-                    m_elevatorGearbox,
-                    ElevatorConstants.kElevatorGearing,
-                    ElevatorConstants.kCarriageMass,
-                    ElevatorConstants.kElevatorDrumRadius,
-                    ElevatorConstants.kMinElevatorHeight,
-                    ElevatorConstants.kMaxElevatorHeight,
-                    VecBuilder.fill(0.01));
+    private final ElevatorSim m_elevatorSim;
     private final EncoderSim m_encoderSim;
 
     // Create a Mechanism2d visualization of the elevator
     private final Mechanism2d m_mech2d = new Mechanism2d(20, 50);
     private final MechanismRoot2d m_mech2dRoot = m_mech2d.getRoot("Elevator Root", 10, 0);
-    private final MechanismLigament2d m_elevatorMech2d =
-            m_mech2dRoot.append(
-                    new MechanismLigament2d(
-                            "Elevator",
-                            Units.metersToInches(m_elevatorSim.getPositionMeters()),
-                            90));
+    private final MechanismLigament2d m_elevatorMech2d;
 
     public ElevatorSimulator(Elevator elevator) {
         this.elevator = elevator;
+        m_elevatorSim =
+                new ElevatorSim(
+                        m_elevatorGearbox,
+                        this.elevator.config.kElevatorGearing,
+                        this.elevator.config.kCarriageMass,
+                        this.elevator.config.kElevatorDrumRadius,
+                        this.elevator.config.kMinElevatorHeight,
+                        this.elevator.config.kMaxElevatorHeight,
+                        VecBuilder.fill(0.01));
+
+        m_elevatorMech2d =
+                m_mech2dRoot.append(
+                        new MechanismLigament2d(
+                                "Elevator",
+                                Units.metersToInches(m_elevatorSim.getPositionMeters()),
+                                90));
+
         m_encoderSim = new EncoderSim(elevator.m_encoder);
         // Publish Mechanism2d to SmartDashboard
         SmartDashboard.putData("Elevator Sim", m_mech2d);

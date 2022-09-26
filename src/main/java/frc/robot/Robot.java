@@ -27,6 +27,7 @@ import frc.robot.pilot.PilotGamepad;
  * project.
  */
 public class Robot extends TimedRobot {
+    public static RobotConfig config;
     public static RobotTelemetry telemetry;
     public static Drivetrain drivetrain;
     public static OnBoardIO onboardIO;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 
     // Intialize subsystems and run their setupDefaultCommand methods here
     private void intializeSubsystems() {
+        config = new RobotConfig();
         drivetrain = new Drivetrain();
         elevator = new Elevator();
         intake = new Intake();
@@ -61,7 +63,7 @@ public class Robot extends TimedRobot {
         LiveWindow.setEnabled(false); // Disable Live Window we don't need that data being sent
         LiveWindow.disableAllTelemetry();
 
-        // Reset Configs for all gamepads and other button bindings
+        // Reset Config for all gamepads and other button bindings
         pilotGamepad.resetConfig();
     }
 
@@ -71,9 +73,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        MAC = Util.getMACaddress(); // Set the MAC Address for this robot, useful for
-        // adjusting comp/practice bot
-        // settings
+        /* Set the MAC Address for this robot, useful for adjusting comp/practice bot settings*/
+        MAC = Util.getMACaddress();
         intializeSubsystems();
     }
 

@@ -2,8 +2,6 @@
 // PID, Kinematics, Velocity controlers, etc
 package frc.robot.drivetrain;
 
-import static frc.robot.drivetrain.DrivetrainConstants.*;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -17,17 +15,21 @@ public class Advanced {
 
     private Drivetrain dt;
 
-    public final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kVLinear);
+    public final SimpleMotorFeedforward feedforward;
 
-    public final DifferentialDriveKinematics kinematics =
-            new DifferentialDriveKinematics(kTrackWidth);
+    public final DifferentialDriveKinematics kinematics;
 
-    public final PIDController leftPid = new PIDController(kPLeft, 0, 0);
-    public final PIDController rightPid = new PIDController(kPRight, 0, 0);
-    public final RamseteController ramseteController = new RamseteController(ramseteB, ramseteZeta);
+    public final PIDController leftPid;
+    public final PIDController rightPid;
+    public final RamseteController ramseteController;
 
     public Advanced(Drivetrain dt) {
         this.dt = dt;
+        feedforward = new SimpleMotorFeedforward(dt.config.kS, dt.config.kVLinear);
+        kinematics = new DifferentialDriveKinematics(dt.config.kTrackWidth);
+        leftPid = new PIDController(dt.config.kPLeft, 0, 0);
+        rightPid = new PIDController(dt.config.kPRight, 0, 0);
+        ramseteController = new RamseteController(dt.config.ramseteB, dt.config.ramseteZeta);
     }
 
     // DriveSpeeds takes xSpeed in meters per sec, and rot in radians per sec

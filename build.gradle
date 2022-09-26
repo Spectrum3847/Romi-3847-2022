@@ -33,7 +33,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.1'
 
-    implementation 'com.github.Spectrum3847:SpectrumLib:main-SNAPSHOT'
+    implementation ('com.github.Spectrum3847:SpectrumLib:main-SNAPSHOT') { changing = true }
 }
 
 // Simulation configuration (e.g. environment variables).

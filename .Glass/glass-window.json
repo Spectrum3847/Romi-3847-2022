@@ -6,15 +6,25 @@
       "style": "0",
       "userScale": "2",
       "width": "1091",
-      "xpos": "-1523",
-      "ypos": "161"
+      "xpos": "1048",
+      "ypos": "1239"
     }
   },
   "Window": {
+    "###/SmartDashboard/Elevator Sim": {
+      "Collapsed": "0",
+      "Pos": "138,382",
+      "Size": "200,197"
+    },
     "###/SmartDashboard/Field": {
       "Collapsed": "0",
-      "Pos": "320,74",
+      "Pos": "471,32",
       "Size": "582,357"
+    },
+    "###/SmartDashboard/Scheduler": {
+      "Collapsed": "0",
+      "Pos": "19,184",
+      "Size": "400,200"
     },
     "###NetworkTables": {
       "Collapsed": "0",
@@ -24,7 +34,7 @@
     "###NetworkTables Settings": {
       "Collapsed": "0",
       "Pos": "8,23",
-      "Size": "272,123"
+      "Size": "330,138"
     },
     "Debug##Default": {
       "Collapsed": "0",

@@ -6,8 +6,8 @@
       "style": "0",
       "userScale": "2",
       "width": "1600",
-      "xpos": "126",
-      "ypos": "31"
+      "xpos": "1014",
+      "ypos": "535"
     }
   },
   "Window": {
@@ -21,15 +21,20 @@
       "Pos": "349,20",
       "Size": "705,415"
     },
+    "###/SmartDashboard/Scheduler": {
+      "Collapsed": "0",
+      "Pos": "614,440",
+      "Size": "400,200"
+    },
     "###Addressable LEDs": {
       "Collapsed": "0",
       "Pos": "201,19",
-      "Size": "170,674"
+      "Size": "163,54"
     },
     "###Encoders": {
       "Collapsed": "0",
       "Pos": "1049,20",
-      "Size": "280,736"
+      "Size": "280,502"
     },
     "###FMS": {
       "Collapsed": "0",
@@ -54,12 +59,12 @@
     "###PWM Outputs": {
       "Collapsed": "0",
       "Pos": "1164,692",
-      "Size": "131,150"
+      "Size": "131,90"
     },
     "###Solenoids": {
       "Collapsed": "0",
       "Pos": "1362,636",
-      "Size": "201,60"
+      "Size": "109,54"
     },
     "###System Joysticks": {
       "Collapsed": "0",
@@ -69,7 +74,7 @@
     "###Timing": {
       "Collapsed": "0",
       "Pos": "5,120",
-      "Size": "162,168"
+      "Size": "162,142"
     },
     "Debug##Default": {
       "Collapsed": "0",

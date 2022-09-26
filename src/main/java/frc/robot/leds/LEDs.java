@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LEDs extends SubsystemBase {
-
+    public LEDConfig config;
     private final AddressableLED ledStrip;
     private final AddressableLEDBuffer ledBuffer;
 
@@ -24,8 +24,9 @@ public class LEDs extends SubsystemBase {
     public LEDStripStatus stripStatus;
 
     public LEDs() {
-        ledStrip = new AddressableLED(LEDConstants.ADDRESSABLE_LED);
-        ledBuffer = new AddressableLEDBuffer(LEDConstants.LED_COUNT);
+        config = new LEDConfig();
+        ledStrip = new AddressableLED(config.ADDRESSABLE_LED);
+        ledBuffer = new AddressableLEDBuffer(config.LED_COUNT);
 
         ledStrip.setLength(ledBuffer.getLength());
         ledStrip.setData(ledBuffer);

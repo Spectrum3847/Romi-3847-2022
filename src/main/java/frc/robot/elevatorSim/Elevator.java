@@ -10,18 +10,22 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
+    public ElevatorConfig config;
 
     // Standard classes for controlling our elevator
-    public final PIDController m_controller =
-            new PIDController(ElevatorConstants.kElevatorKp, 0, 0);
-    public final Encoder m_encoder =
-            new Encoder(ElevatorConstants.kEncoderAChannel, ElevatorConstants.kEncoderBChannel);
-    public final PWMSparkMax m_motor = new PWMSparkMax(ElevatorConstants.kMotorPort);
+    public final PIDController m_controller;
+    public final Encoder m_encoder;
+    public final PWMSparkMax m_motor;
     public final ElevatorSimulator elevatorSim;
 
     /** Creates a new ElevatorSim. */
     public Elevator() {
-        m_encoder.setDistancePerPulse(ElevatorConstants.kElevatorEncoderDistPerPulse);
+        config = new ElevatorConfig();
+        m_controller = new PIDController(config.kElevatorKp, 0, 0);
+        m_encoder = new Encoder(config.kEncoderAChannel, config.kEncoderBChannel);
+        m_motor = new PWMSparkMax(config.kMotorPort);
+
+        m_encoder.setDistancePerPulse(config.kElevatorEncoderDistPerPulse);
 
         // Used for simulation
         elevatorSim = new ElevatorSimulator(this);

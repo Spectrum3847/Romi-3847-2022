@@ -1,12 +1,11 @@
 package frc.robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.leds.LEDConstants;
 import frc.robot.leds.LEDs;
 
 public class AuroraLEDCommand extends CommandBase {
     /** Creates a new AuroraLEDCommand. */
-    private final LEDs ledSubsystem;
+    private final LEDs leds;
 
     private final int NUM_LED_GROUPS = 6;
     private final int NUM_COLORS = 4;
@@ -29,18 +28,18 @@ public class AuroraLEDCommand extends CommandBase {
     private final int waitTime = 50;
     private int position = 0;
     private long startTime = System.currentTimeMillis();
-    private int[][][] ledStates = new int[LEDConstants.LED_COUNT][LEDConstants.LED_COUNT][3];
+    private int[][][] ledStates;
 
-    public AuroraLEDCommand(LEDs ledSubsystem) {
-        this.ledSubsystem = ledSubsystem;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(ledSubsystem);
+    public AuroraLEDCommand(LEDs leds) {
+        this.leds = leds;
+        addRequirements(leds);
+        ledStates = new int[leds.config.LED_COUNT][leds.config.LED_COUNT][3];
 
-        for (int position = 0; position < LEDConstants.LED_COUNT; position += 1) {
-            int[][] state = new int[LEDConstants.LED_COUNT][3];
+        for (int position = 0; position < leds.config.LED_COUNT; position += 1) {
+            int[][] state = new int[leds.config.LED_COUNT][3];
             for (int j = 0;
-                    j < LEDConstants.LED_COUNT + 1;
-                    j += (LEDConstants.LED_COUNT / NUM_LED_GROUPS)) {
+                    j < leds.config.LED_COUNT + 1;
+                    j += (leds.config.LED_COUNT / NUM_LED_GROUPS)) {
                 int i = 0;
                 int offset = j + position;
                 // int gradientOffset = j - position; // 0
@@ -89,13 +88,13 @@ public class AuroraLEDCommand extends CommandBase {
     private int[] calcBoundaries() {
         int[] result = new int[NUM_COLORS];
         for (int i = 0; i < NUM_COLORS; i++) {
-            result[i] = ((i + 1) * LEDConstants.LED_COUNT) / (NUM_COLORS * NUM_LED_GROUPS);
+            result[i] = ((i + 1) * leds.config.LED_COUNT) / (NUM_COLORS * NUM_LED_GROUPS);
         }
         return result;
     }
 
     private int wrapValues(int num) {
-        return num % LEDConstants.LED_COUNT;
+        return num % leds.config.LED_COUNT;
     }
 
     private int[] getAvgValue(int[] color1, int[] color2) {
@@ -133,15 +132,15 @@ public class AuroraLEDCommand extends CommandBase {
     public void execute() {
         if (System.currentTimeMillis() - startTime >= waitTime) {
 
-            for (int i = 0; i < LEDConstants.LED_COUNT; i += 1) {
-                ledSubsystem.setRGB(
+            for (int i = 0; i < leds.config.LED_COUNT; i += 1) {
+                leds.setRGB(
                         wrapValues(i),
                         ledStates[position][i][0],
                         ledStates[position][i][1],
                         ledStates[position][i][2]);
             }
 
-            ledSubsystem.sendData();
+            leds.sendData();
             position = wrapValues(position + 1);
             startTime = System.currentTimeMillis();
         }

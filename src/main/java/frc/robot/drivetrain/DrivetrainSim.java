@@ -4,8 +4,6 @@
 
 package frc.robot.drivetrain;
 
-import static frc.robot.drivetrain.DrivetrainConstants.*;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
@@ -29,23 +27,29 @@ public class DrivetrainSim {
     private final EncoderSim m_leftEncoderSim;
     private final EncoderSim m_rightEncoderSim;
     // private final Field2d m_fieldSim = new Field2d();
-    private final LinearSystem<N2, N2, N2> m_drivetrainSystem =
-            LinearSystemId.identifyDrivetrainSystem(
-                    kVLinear, kALinear, kVAngular, kAAngular, kTrackWidth);
-    private final DifferentialDrivetrainSim m_drivetrainSimulator =
-            new DifferentialDrivetrainSim(
-                    m_drivetrainSystem,
-                    DCMotor.getRomiBuiltIn(1),
-                    1,
-                    kTrackWidth,
-                    kWheelRadius,
-                    null);
+    private final LinearSystem<N2, N2, N2> m_drivetrainSystem;
+    private final DifferentialDrivetrainSim m_drivetrainSimulator;
 
     public DrivetrainSim(Drivetrain dt) {
         this.dt = dt;
         m_gyroSim = new AnalogGyroSim(dt.odometry.m_gyro);
         m_leftEncoderSim = new EncoderSim(dt.odometry.leftEncoder);
         m_rightEncoderSim = new EncoderSim(dt.odometry.rightEncoder);
+        m_drivetrainSystem =
+                LinearSystemId.identifyDrivetrainSystem(
+                        dt.config.kVLinear,
+                        dt.config.kALinear,
+                        dt.config.kVAngular,
+                        dt.config.kAAngular,
+                        dt.config.kTrackWidth);
+        m_drivetrainSimulator =
+                new DifferentialDrivetrainSim(
+                        m_drivetrainSystem,
+                        DCMotor.getRomiBuiltIn(1),
+                        1,
+                        dt.config.kTrackWidth,
+                        dt.config.kWheelRadius,
+                        null);
     }
 
     /** Reset all sim devices to 0 */

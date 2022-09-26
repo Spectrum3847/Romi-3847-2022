@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.SpectrumLib.telemetry.TelemetrySubsystem;
 import frc.robot.auton.AutonSetup;
 
@@ -15,11 +17,17 @@ public class RobotTelemetry extends TelemetrySubsystem {
 
     public RobotTelemetry() {
         super();
+        // Allows us to see all running commands on the robot
+        SmartDashboard.putData(CommandScheduler.getInstance());
+
+        // Setup the auton selector to display on shuffleboard
         AutonSetup.setupSelectors();
         autonSelectorWidget =
                 mainTab.add("Auton Selection", AutonSetup.autonChooser)
                         .withPosition(4, 0)
                         .withSize(3, 1);
+
+        // Add Romi Connected Display to shuffelboard
         mainTab.addBoolean("Romi Connected", () -> Robot.isRomiConnected()).withPosition(0, 0);
     }
 }
