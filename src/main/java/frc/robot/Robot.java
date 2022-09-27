@@ -87,9 +87,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        // Start the DataLogger and log DS values
         DataLogManager.start();
         DriverStation.startDataLog(DataLogManager.getLog());
-        /* Set the MAC Address for this robot, useful for adjusting comp/practice bot settings*/
+
+        // Set the MAC Address for this robot, useful for adjusting comp/practice bot settings*/
         MAC = Network.getMACaddress();
         Shuffleboard.getTab("Robot"); // Makes the Robot tab the first tab on the Shuffleboard
         intializeSubsystems();
