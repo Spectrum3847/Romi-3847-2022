@@ -105,6 +105,7 @@
       "/Shuffleboard/Main/Auton": "String Chooser",
       "/Shuffleboard/Main/Auton Selection": "String Chooser",
       "/Shuffleboard/Main/SendableChooser[0]": "String Chooser",
+      "/Shuffleboard/Robot/Auton Selection": "String Chooser",
       "/SmartDashboard/Elevator Sim": "Mechanism2d",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/Scheduler": "Scheduler",

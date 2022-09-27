@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.SpectrumLib.sim.PhysicsSim;
-import frc.SpectrumLib.util.Util;
+import frc.SpectrumLib.util.Network;
 import frc.robot.auton.AutonSetup;
 import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrain.commands.DrivetrainCommands;
@@ -13,6 +13,7 @@ import frc.robot.elevatorSim.Elevator;
 import frc.robot.elevatorSim.ElevatorCommands;
 import frc.robot.intakeExample.Intake;
 import frc.robot.intakeExample.IntakeCommands;
+import frc.robot.intakeExample.IntakeNull;
 import frc.robot.leds.LEDs;
 import frc.robot.leds.commands.LEDCommands;
 import frc.robot.onBoardIO.OnBoardIO;
@@ -39,9 +40,19 @@ public class Robot extends TimedRobot {
     // Intialize subsystems and run their setupDefaultCommand methods here
     private void intializeSubsystems() {
         config = new RobotConfig();
+
+        // Setup Subsystems that are different on COMP/PRACTICE/SIM
+        switch (config.getRobotType()) {
+            case PRACTICE:
+                intake = new IntakeNull();
+                break;
+            default:
+                intake = new Intake();
+                break;
+        }
+
         drivetrain = new Drivetrain();
         elevator = new Elevator();
-        intake = new Intake();
         leds = new LEDs();
         onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
         pilotGamepad = new PilotGamepad();
@@ -74,7 +85,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         /* Set the MAC Address for this robot, useful for adjusting comp/practice bot settings*/
-        MAC = Util.getMACaddress();
+        MAC = Network.getMACaddress();
         intializeSubsystems();
     }
 

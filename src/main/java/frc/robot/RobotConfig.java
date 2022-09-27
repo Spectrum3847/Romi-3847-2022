@@ -14,7 +14,7 @@ public final class RobotConfig {
     public final String Canivore = "3847";
     public final Motors motors = new Motors();
     public final Pneumatic pneumatic = new Pneumatic();
-    public final String praticeBotMAC = "00-80-2F-1C-1C-1C";
+    public final String praticeBotMAC = "18:66:DA:19:D4:41";
 
     public final class Motors {
         public final int driveMotorLeft = 0;
