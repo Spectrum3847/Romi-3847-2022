@@ -99,9 +99,7 @@ public class RobotTelemetry extends TelemetrySubsystem {
     }
 
     public void checkBatteryWhenDisabledalert() {
-        if (DriverStation.isDisabled()) {
-            batteryAlert.set(Util.checkBattery(12.0));
-        }
+        batteryAlert.set(DriverStation.isDisabled() && Util.checkBattery(12.0));
     }
 
     public boolean flash() {
