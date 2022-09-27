@@ -26,6 +26,7 @@ public class RobotTelemetry extends TelemetrySubsystem {
 
     public RobotTelemetry() {
         super("Robot");
+
         // Allows us to see all running commands on the robot
         SmartDashboard.putData(CommandScheduler.getInstance());
 
@@ -55,6 +56,8 @@ public class RobotTelemetry extends TelemetrySubsystem {
         tab.add("Alerts", SmartDashboard.getData("Alerts")).withPosition(4, 0).withSize(2, 2);
         tab.add("MAC Address", Robot.MAC).withPosition(4, 2).withSize(2, 1);
         tab.addString("IP Address", () -> getIP()).withPosition(4, 3).withSize(2, 1);
+
+        // Intiate the Subystem Telemetry Classes
     }
 
     @Override

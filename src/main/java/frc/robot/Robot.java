@@ -1,7 +1,10 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DataLogManager;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.SpectrumLib.sim.PhysicsSim;
@@ -37,6 +40,8 @@ public class Robot extends TimedRobot {
     public static Elevator elevator;
     public static Intake intake;
 
+    public static String MAC = "";
+
     // Intialize subsystems and run their setupDefaultCommand methods here
     private void intializeSubsystems() {
         config = new RobotConfig();
@@ -66,8 +71,6 @@ public class Robot extends TimedRobot {
         PilotCommands.setupDefaultCommand();
     }
 
-    public static String MAC = "";
-
     public static void resetCommandsAndButtons() {
         CommandScheduler.getInstance().cancelAll(); // Disable any currently running commands
         CommandScheduler.getInstance().clearButtons();
@@ -84,8 +87,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        DataLogManager.start();
+        DriverStation.startDataLog(DataLogManager.getLog());
         /* Set the MAC Address for this robot, useful for adjusting comp/practice bot settings*/
         MAC = Network.getMACaddress();
+        Shuffleboard.getTab("Robot"); // Makes the Robot tab the first tab on the Shuffleboard
         intializeSubsystems();
     }
 
