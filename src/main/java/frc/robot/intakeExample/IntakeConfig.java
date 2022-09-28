@@ -6,6 +6,7 @@ import frc.robot.Robot;
 
 /** Constants for the intake */
 public class IntakeConfig extends RollerMechConfig {
+    int follerID = Robot.config.motors.intakeFollower;
 
     public IntakeConfig(String name) {
         super(name);

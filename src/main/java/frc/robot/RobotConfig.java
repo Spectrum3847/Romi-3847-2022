@@ -21,7 +21,7 @@ public final class RobotConfig {
         public final int driveMotorRight = 1;
         public final int elevatorMotor = 9;
         public final int intakeMotor = 20;
-        public final int armMotor = 21;
+        public final int intakeFollower = 21;
     }
 
     public final class Pneumatic {

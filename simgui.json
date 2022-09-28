@@ -44,6 +44,16 @@
           "open": true
         }
       },
+      "Talon FX[21]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[21]/Integrated Sensor": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon SRX[21]": {
         "header": {
           "open": true

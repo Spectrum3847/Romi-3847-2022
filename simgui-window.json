@@ -11,6 +11,11 @@
     }
   },
   "Window": {
+    "###/FMSInfo": {
+      "Collapsed": "0",
+      "Pos": "710,555",
+      "Size": "202,194"
+    },
     "###/SmartDashboard/Elevator Sim": {
       "Collapsed": "0",
       "Pos": "348,439",
@@ -38,7 +43,7 @@
     },
     "###FMS": {
       "Collapsed": "0",
-      "Pos": "8,494",
+      "Pos": "36,516",
       "Size": "336,164"
     },
     "###Joysticks": {
