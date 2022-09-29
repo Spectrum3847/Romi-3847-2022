@@ -2,7 +2,8 @@
   "HALProvider": {
     "Addressable LEDs": {
       "0": {
-        "columns": 8
+        "columns": 1,
+        "order": 1
       },
       "window": {
         "visible": true
@@ -101,9 +102,14 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriverGamepad": "Subsystem",
       "/LiveWindow/Drivetrain": "Subsystem",
+      "/LiveWindow/Elevator": "Subsystem",
+      "/LiveWindow/FollowerFalcon": "Subsystem",
+      "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/LEDSubsystem": "Subsystem",
       "/LiveWindow/LEDs": "Subsystem",
       "/LiveWindow/OnBoardIO": "Subsystem",
+      "/LiveWindow/PilotGamepad": "Subsystem",
+      "/LiveWindow/PneumaticSubsystem/IntakePneumatic": "Subsystem",
       "/LiveWindow/RobotTelemetry": "Subsystem",
       "/LiveWindow/Ungrouped/AnalogGyro[0]": "Gyro",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
@@ -111,7 +117,13 @@
       "/LiveWindow/Ungrouped/DigitalInput[1]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[2]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalOutput[3]": "Digital Output",
+      "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[2]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[3]": "PIDController",
+      "/LiveWindow/Ungrouped/PWMSparkMax[9]": "Motor Controller",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon FX [20]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [21]": "Motor Controller",
       "/Shuffleboard/Main/Auton": "String Chooser",
       "/Shuffleboard/Main/Auton Selection": "String Chooser",
       "/Shuffleboard/Main/SendableChooser[0]": "String Chooser",

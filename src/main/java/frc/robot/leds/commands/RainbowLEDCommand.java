@@ -1,6 +1,7 @@
 package frc.robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
 public class RainbowLEDCommand extends CommandBase {
@@ -9,10 +10,15 @@ public class RainbowLEDCommand extends CommandBase {
 
     private int rainbowFirstPixelHue;
 
-    public RainbowLEDCommand(LEDs ledSubsystem, int rainbowFirstPixelHue) {
-        this.ledSubsystem = ledSubsystem;
+    public RainbowLEDCommand(int rainbowFirstPixelHue) {
+        this.ledSubsystem = Robot.leds;
         this.rainbowFirstPixelHue = rainbowFirstPixelHue;
+
         addRequirements(ledSubsystem);
+    }
+
+    public boolean runsWhenDisabled() {
+        return true;
     }
 
     // Called when the command is initially scheduled.

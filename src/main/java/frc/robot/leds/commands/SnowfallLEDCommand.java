@@ -1,6 +1,7 @@
 package frc.robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
 public class SnowfallLEDCommand extends CommandBase {
@@ -11,12 +12,16 @@ public class SnowfallLEDCommand extends CommandBase {
     long startTime;
     int stage;
 
-    public SnowfallLEDCommand(LEDs ledSubsystem, long waitTime) {
-        this.ledSubsystem = ledSubsystem;
+    public SnowfallLEDCommand(long waitTime) {
+        ledSubsystem = Robot.leds;
         this.waitTime = waitTime;
         this.startTime = System.currentTimeMillis();
         stage = 0;
         addRequirements(ledSubsystem);
+    }
+
+    public boolean runsWhenDisabled() {
+        return true;
     }
 
     // Called when the command is initially scheduled.
@@ -48,10 +53,6 @@ public class SnowfallLEDCommand extends CommandBase {
             stage = stage + 1 > 3 ? 0 : stage + 1;
             startTime = System.currentTimeMillis();
         }
-    }
-
-    public boolean runsWhenDisabled() {
-        return true;
     }
 
     // Called once the command ends or is interrupted.

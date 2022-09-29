@@ -4,8 +4,8 @@ import frc.robot.Robot;
 
 /** Add your docs here. */
 public class LEDConfig {
-    public final int ADDRESSABLE_LED = 3;
-    public final int LED_COUNT = 288;
+    public final int ADDRESSABLE_LED = Robot.config.motors.ledOutput;
+    public final int LED_COUNT = 60;
 
     public LEDConfig() {
         switch (Robot.config.getRobotType()) {

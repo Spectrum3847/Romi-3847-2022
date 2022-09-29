@@ -19,6 +19,7 @@ public final class RobotConfig {
     public final class Motors {
         public final int driveMotorLeft = 0;
         public final int driveMotorRight = 1;
+        public final int ledOutput = 3;
         public final int elevatorMotor = 9;
         public final int intakeMotor = 20;
         public final int intakeFollower = 21;

@@ -1,28 +1,38 @@
 package frc.robot.leds.commands;
 
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
 public class SetLEDToRGBCommand extends CommandBase {
-    private final LEDs lEDSubsystem;
+    private final LEDs ledSubsystem;
     private final int r, g, b;
 
-    public SetLEDToRGBCommand(LEDs lEDSubsystem, int r, int g, int b) {
-        this.lEDSubsystem = lEDSubsystem;
+    public SetLEDToRGBCommand(int r, int g, int b) {
+        ledSubsystem = Robot.leds;
         this.r = r;
         this.g = g;
         this.b = b;
-        // each subsystem used by the command must be passed into the
-        // addRequirements() method (which takes a vararg of Subsystem)
-        addRequirements(this.lEDSubsystem);
+        addRequirements(ledSubsystem);
+    }
+
+    public SetLEDToRGBCommand(Color color) {
+        this(new Color8Bit(color).red, new Color8Bit(color).green, new Color8Bit(color).blue);
+    }
+
+    @Override
+    public boolean runsWhenDisabled() {
+        return true;
     }
 
     @Override
     public void initialize() {
-        for (int i = 0; i < lEDSubsystem.getBufferLength(); i++) {
-            lEDSubsystem.setRGB(i, r, g, b);
+        for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
+            ledSubsystem.setRGB(i, r, g, b);
         }
-        lEDSubsystem.sendData();
+        ledSubsystem.sendData();
     }
 
     @Override
@@ -30,11 +40,6 @@ public class SetLEDToRGBCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
-    }
-
-    @Override
-    public boolean runsWhenDisabled() {
         return true;
     }
 

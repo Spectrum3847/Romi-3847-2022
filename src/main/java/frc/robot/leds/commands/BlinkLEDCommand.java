@@ -1,28 +1,50 @@
 package frc.robot.leds.commands;
 
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.SpectrumLib.util.Util;
+import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
 public class BlinkLEDCommand extends CommandBase {
     LEDs ledSubsystem;
     long commandScheduleTime;
     long startTime;
-    int waitTime;
+    int waitTime; // Wait time in milliseconds
     int r, g, b;
     boolean on = true;
 
-    public BlinkLEDCommand(LEDs ledSubsystem, int waitTime, int r, int g, int b) {
-        this.ledSubsystem = ledSubsystem;
-        this.startTime = System.currentTimeMillis();
-        this.waitTime = waitTime;
+    public BlinkLEDCommand(int waitTimeMS, int r, int g, int b) {
+        this.ledSubsystem = Robot.leds;
+        this.startTime = (long) Units.secondsToMilliseconds(Util.getTime());
+        this.waitTime = waitTimeMS;
         this.r = r;
         this.g = g;
         this.b = b;
+
         addRequirements(ledSubsystem);
+    }
+
+    public BlinkLEDCommand(int waitTime, Color color) {
+        this(
+                waitTime,
+                new Color8Bit(color).red,
+                new Color8Bit(color).green,
+                new Color8Bit(color).blue);
+    }
+
+    public BlinkLEDCommand(Color color) {
+        this(500, color);
     }
 
     public boolean runsWhenDisabled() {
         return true;
+    }
+
+    private long getTime() {
+        return (long) Units.secondsToMilliseconds(Util.getTime());
     }
 
     // Called when the command is initially scheduled.
@@ -32,13 +54,13 @@ public class BlinkLEDCommand extends CommandBase {
             ledSubsystem.setRGB(i, r, g, b);
         }
         ledSubsystem.sendData();
-        commandScheduleTime = System.currentTimeMillis();
+        commandScheduleTime = getTime();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (System.currentTimeMillis() - startTime >= waitTime) {
+        if (getTime() - startTime >= waitTime) {
             if (on) {
                 for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
                     ledSubsystem.setRGB(i, 0, 0, 0);
@@ -52,7 +74,7 @@ public class BlinkLEDCommand extends CommandBase {
                 ledSubsystem.sendData();
                 on = true;
             }
-            startTime = System.currentTimeMillis();
+            startTime = getTime();
         }
     }
 

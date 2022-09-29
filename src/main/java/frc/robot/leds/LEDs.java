@@ -9,6 +9,7 @@ public class LEDs extends SubsystemBase {
     public LEDConfig config;
     private final AddressableLED ledStrip;
     private final AddressableLEDBuffer ledBuffer;
+    public final LEDScheduler scheduler;
 
     private int r, g, b;
 
@@ -21,6 +22,7 @@ public class LEDs extends SubsystemBase {
 
     public LEDs() {
         config = new LEDConfig();
+
         ledStrip = new AddressableLED(config.ADDRESSABLE_LED);
         ledBuffer = new AddressableLEDBuffer(config.LED_COUNT);
 
@@ -32,6 +34,8 @@ public class LEDs extends SubsystemBase {
         SmartDashboard.putNumber("r", r);
         SmartDashboard.putNumber("g", g);
         SmartDashboard.putNumber("b", b);
+
+        scheduler = new LEDScheduler(this);
     }
 
     @Override
