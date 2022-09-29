@@ -33,15 +33,4 @@ public abstract class LEDCommandBase extends CommandBase {
     public boolean isFinished() {
         return false;
     }
-
-    /**
-     * Decorates this Command with a name. Is an inline function for #setName(String);
-     *
-     * @param name name
-     * @return the decorated Command
-     */
-    public LEDCommandBase withName(String name) {
-        this.setName(name);
-        return this;
-    }
 }

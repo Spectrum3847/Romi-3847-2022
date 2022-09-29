@@ -24,9 +24,8 @@ public class LEDScheduler {
         LEDSchedulerThread.start();
     }
 
-    public void setDefaultAnimation(
-            String name, LEDCommandBase command, int priority, double timeout) {
-        defaultAnimation = new Animation(name, command, priority, timeout);
+    public void setDefaultAnimation(String name, LEDCommandBase command) {
+        defaultAnimation = new Animation(name, command, 2, -101);
         if (top == null) {
             top = defaultAnimation;
         }
@@ -34,11 +33,7 @@ public class LEDScheduler {
     }
 
     private void intialAnimation() {
-        setDefaultAnimation(
-                "Default LED Animation",
-                new BlinkLEDCommand(Color.kWhite).withName("Default LEDs"),
-                1,
-                -101);
+        setDefaultAnimation("Default LED Animation", new BlinkLEDCommand(Color.kWhite));
     }
 
     private void runScheduler() {
@@ -85,12 +80,13 @@ public class LEDScheduler {
         addAnimation(animation);
     }
 
-    public void addAnimation(Animation animation) {
+    private void addAnimation(Animation animation) {
         // Check if this animation is already added (same name), if it is delete the old
         // one and add the new one
         if (animationArrary.indexOf(animation) >= 0) {
             animationArrary.remove(animationArrary.indexOf(animation));
         }
+        animation.getCommand().setName(animation.name);
         animationArrary.add(animation);
     }
 
