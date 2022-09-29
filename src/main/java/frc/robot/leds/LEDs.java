@@ -2,7 +2,6 @@ package frc.robot.leds;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LEDs extends SubsystemBase {
@@ -10,8 +9,6 @@ public class LEDs extends SubsystemBase {
     private final AddressableLED ledStrip;
     private final AddressableLEDBuffer ledBuffer;
     public final LEDScheduler scheduler;
-
-    private int r, g, b;
 
     public enum LEDStripStatus {
         OFF,
@@ -31,9 +28,6 @@ public class LEDs extends SubsystemBase {
         ledStrip.start();
 
         stripStatus = LEDStripStatus.ON;
-        SmartDashboard.putNumber("r", r);
-        SmartDashboard.putNumber("g", g);
-        SmartDashboard.putNumber("b", b);
 
         scheduler = new LEDScheduler(this);
     }

@@ -34,11 +34,10 @@ public class PilotGamepad extends Gamepad {
     }
 
     public void setupDisabledButtons() {
+        gamepad.aButton.whileHeld(LEDCommands.solidColor(Color.kGreen, "Green", 5, 5));
         gamepad.bButton.whileHeld(LEDCommands.blink(Color.kBlue, "Blink Blue", 10, 5));
-        gamepad.aButton.whileHeld(LEDCommands.gradient(40, "Graident", 15, 5));
-        gamepad.xButton.whileHeld(LEDCommands.rainbow("Rainbow", 20, 5));
-        gamepad.yButton.whileHeld(LEDCommands.snowfall("Snowfall", 25, 5));
-        gamepad.leftBumper.whileHeld(LEDCommands.solidColor(Color.kGreen, "Green", 30, 5));
+        gamepad.xButton.whileHeld(LEDCommands.rainbow("Rainbow", 15, 5));
+        gamepad.yButton.whileHeld(LEDCommands.snowfall("Snowfall", 20, 5));
     }
 
     public void setupTestButtons() {}
