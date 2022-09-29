@@ -1,31 +1,27 @@
 package frc.robot.leds.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
-public class RainbowLEDCommand extends CommandBase {
+public class RainbowLEDCommand extends LEDCommandBase {
     /** Creates a new RainbowCommand. */
     private final LEDs ledSubsystem;
 
     private int rainbowFirstPixelHue;
 
     public RainbowLEDCommand(int rainbowFirstPixelHue) {
+        super();
         this.ledSubsystem = Robot.leds;
         this.rainbowFirstPixelHue = rainbowFirstPixelHue;
-
-        addRequirements(ledSubsystem);
     }
 
-    public boolean runsWhenDisabled() {
-        return true;
-    }
+    public void ledInitialize() {}
 
     // Called when the command is initially scheduled.
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {
+    public void ledExecute() {
         // For every pixel
         for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
             // Calculate the hue - hue is easier for rainbows because the color
@@ -40,15 +36,5 @@ public class RainbowLEDCommand extends CommandBase {
         // Check bounds
         rainbowFirstPixelHue %= 180;
         ledSubsystem.sendData();
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {}
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return false;
     }
 }

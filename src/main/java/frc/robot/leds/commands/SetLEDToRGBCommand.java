@@ -2,11 +2,10 @@ package frc.robot.leds.commands;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.leds.LEDs;
 
-public class SetLEDToRGBCommand extends CommandBase {
+public class SetLEDToRGBCommand extends LEDCommandBase {
     private final LEDs ledSubsystem;
     private final int r, g, b;
 
@@ -15,7 +14,6 @@ public class SetLEDToRGBCommand extends CommandBase {
         this.r = r;
         this.g = g;
         this.b = b;
-        addRequirements(ledSubsystem);
     }
 
     public SetLEDToRGBCommand(Color color) {
@@ -28,7 +26,7 @@ public class SetLEDToRGBCommand extends CommandBase {
     }
 
     @Override
-    public void initialize() {
+    public void ledInitialize() {
         for (int i = 0; i < ledSubsystem.getBufferLength(); i++) {
             ledSubsystem.setRGB(i, r, g, b);
         }
@@ -36,7 +34,7 @@ public class SetLEDToRGBCommand extends CommandBase {
     }
 
     @Override
-    public void execute() {}
+    public void ledExecute() {}
 
     @Override
     public boolean isFinished() {

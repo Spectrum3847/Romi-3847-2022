@@ -6,9 +6,9 @@ package frc.robot.leds;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.SpectrumLib.util.Util;
 import frc.robot.leds.commands.BlinkLEDCommand;
+import frc.robot.leds.commands.LEDCommandBase;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,26 +17,33 @@ import java.util.Comparator;
 public class LEDScheduler {
     ArrayList<Animation> animationArrary = new ArrayList<Animation>();
     Animation top;
+    Animation defaultAnimation;
 
     public LEDScheduler(LEDs subsystem) {
         System.out.println("Starting LED Scheduler Thread");
         LEDSchedulerThread.start();
     }
 
-    private void setDefault() {
-        top =
-                new Animation(
-                        "Default",
-                        new BlinkLEDCommand(Color.kPurple).withName("Default LEDs"),
-                        1,
-                        -101);
-        addAnimation(top);
-        top.getCommand().schedule();
+    public void setDefaultAnimation(
+            String name, LEDCommandBase command, int priority, double timeout) {
+        defaultAnimation = new Animation(name, command, priority, timeout);
+        if (top == null) {
+            top = defaultAnimation;
+        }
+        addAnimation(defaultAnimation);
+    }
+
+    private void intialAnimation() {
+        setDefaultAnimation(
+                "Default LED Animation",
+                new BlinkLEDCommand(Color.kWhite).withName("Default LEDs"),
+                1,
+                -101);
     }
 
     private void runScheduler() {
         if (top == null) {
-            setDefault();
+            intialAnimation();
         }
         // It the top animation isn't scheduled, schedule it
         if (!top.getCommand().isScheduled()) {
@@ -62,15 +69,18 @@ public class LEDScheduler {
             top.getCommand().cancel();
             top = animationArrary.get(0);
             top.getCommand().schedule();
+            top.getCommand().ledInitialize();
             Util.print("LEDs Set To: " + top.getName());
         }
 
         if (top.getPriority() > 1) {
             top.decrementPriority();
         }
+        // Execute the LED Command
+        top.getCommand().ledExecute();
     }
 
-    public void addAnimation(String name, Command command, int priority, double timeout) {
+    public void addAnimation(String name, LEDCommandBase command, int priority, double timeout) {
         Animation animation = new Animation(name, command, priority, timeout);
         addAnimation(animation);
     }
@@ -86,11 +96,11 @@ public class LEDScheduler {
 
     class Animation {
         String name;
-        Command command;
+        LEDCommandBase command;
         int priority;
         double timeout;
 
-        public Animation(String name, Command command, int priority, double timeout) {
+        public Animation(String name, LEDCommandBase command, int priority, double timeout) {
             this.name = name;
             this.command = command;
             this.priority = priority;
@@ -111,7 +121,7 @@ public class LEDScheduler {
             return name;
         }
 
-        public Command getCommand() {
+        public LEDCommandBase getCommand() {
             return command;
         }
 
