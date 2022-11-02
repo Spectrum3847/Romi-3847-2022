@@ -11,6 +11,7 @@ import frc.robot.Robot;
 public class Intake extends RollerMechSubsystem {
     // Creates an instance of IntakeConstants this is where we configure much of the motor
     public IntakeConfig config;
+    protected IntakeTelemetry telemetry;
     protected FollowerFalcon followerFalcon;
 
     // Creates a pneumatic subsystem inside of the intake, this is ued for moving the intake up and
@@ -24,6 +25,7 @@ public class Intake extends RollerMechSubsystem {
     private Intake(IntakeConfig config) {
         super(config);
         this.config = config;
+        this.telemetry = new IntakeTelemetry(this);
         configureMotors();
 
         // Intialize the Solenoid subsytem with name and it's port form Robot.constants

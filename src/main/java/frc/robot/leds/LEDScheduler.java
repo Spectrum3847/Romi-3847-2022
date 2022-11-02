@@ -154,7 +154,6 @@ public class LEDScheduler {
         }
     }
 
-    /** This thread runs a periodic task in the background to listen for vision camera packets. */
     Thread LEDSchedulerThread =
             new Thread(
                     new Runnable() {
